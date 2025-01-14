@@ -1,0 +1,341 @@
+\documentclass[11pt,a4paper]{ctexart}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-2 2025 Winter}}
+
+{\Large\textbf{HW1}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+
+% 4.2.13, 4.2.14, 4.2.15, 4.2.16, 4.2.17, 4.2.22, 4.2.23, 4.3.13((a),(b)), 4.4.8, 4.4.10.
+
+\section{4.2.13}
+
+Note that we can write:
+\begin{align*}
+    kX\sim \mathrm{ Unif }(0,k) \mathop{ = }\limits^{\mathrm{ d } } \mathrm{ Unif }\{0,1,\ldots, k-1\} +  \mathrm{ Unif }(0,1) := N + U\quad N\perp \!\!\!\perp U
+\end{align*}
+And we have
+\begin{align*}
+    \mathbb{E}\left[ X|Y \right] =& \dfrac{ 1 }{ k }\mathbb{E}\left[ kX| kX-[kX] \right]\\
+    =& \dfrac{ 1 }{ k }\mathbb{E}\left[ N+U | U \right]\\
+    =& \dfrac{ 1 }{ k }(U + \mathbb{E}\left[ N \right] )\\
+    =& \dfrac{ 1 }{ k }( Y + \dfrac{ k-1 }{ 2 })\\
+\end{align*}
+
+
+\section{4.2.14}
+We can write
+\begin{align*}
+    \mathbb{E}\left[ X|Y \right] =& \mathbb{E}\left[ X\mathbf{1}_{X\leq t} + X\mathbf{1}_{X<t} | \max (X,t) \right]\\
+    =& \mathbb{E}\left[ X\mathbf{1}_{\max (X,t) = t} + X\mathbf{1}_{\max (X,t) = X} | \max (X,t) \right]\\
+    =& \mathbf{1}_{Y = t}\mathbb{E}\left[ X|X\leq t \right] + Y\mathbf{1}_{Y > t}
+\end{align*}
+
+The other side of $ Z=\min (X,t) $ is symmetric to the above, so we have
+\begin{align*}
+    \mathbb{E}\left[ X|Z \right] =& \mathbf{1}_{Z = t}\mathbb{E}\left[ X|X\geq t \right] + Z\mathbf{1}_{Z < t} 
+\end{align*}
+
+\section{4.2.15}
+
+\subsection{}
+We can directly write
+\begin{align*}
+    Z|\theta =1 =& [X,Y] \mathop{ = }\limits^{\mathrm{ d } } P\times P\\
+    Z|\theta =0 =& [Y,X] \mathop{ = }\limits^{\mathrm{ d } } P\times P  
+\end{align*}
+where $ X,Y \mathop{ \sim }\limits^{i.i.d.}  P $. i.e. $ Z \perp \!\!\!\perp \theta $.
+
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ g(X,Y)  |Z\right]  =& \mathbb{E}\left[ \mathbb{E}\left[ g(X,Y) |\theta ,Z\right] |\theta  \right]  \\
+    =& \mathbb{P}\left( \theta =1  \right) \mathbb{E}\left[ g(X,Y)|\theta =1,Z \right] + \mathbb{P}\left( \theta =0  \right) \mathbb{E}\left[ g(X,Y)|\theta =0,Z \right]\\
+    =& pg(Z_1,Z_2) + (1-p)g(Z_2,Z_1)
+\end{align*}
+
+
+\section{4.2.16}
+
+\subsection{}
+Note that from the property of conditional variance:
+\begin{align*}
+    \mathbb{E}\left[ X|\mathcal{G} \right] = \mathop{ \arg\min }\limits_{g\in \mathcal{G} } \mathbb{E}\left[ (X-g)^2 \right]   
+\end{align*}
+Then we have for $ \mathcal{G}_1\subseteq \mathcal{G}_2 $:
+\begin{align*}
+    \mathbb{E}\left[ var(X|\mathcal{G}_2) \right] =& \mathbb{E}\left[ \mathop{ \arg\min }\limits_{g\in \mathcal{G}_2 } \mathbb{E}\left[ (X-g)^2 \right]   \right]   \\
+    \leq&  \mathbb{E}\left[ \mathop{ \arg\min }\limits_{g\in \mathcal{G}_1 } \mathbb{E}\left[ (X-g)^2 \right]   \right] \\
+    =& \mathbb{E}\left[ var(X|\mathcal{G}_1) \right]
+\end{align*}
+
+\subsection{}
+We have
+\begin{align*}
+    var(X)=& \mathbb{E}\left[ \mathbb{E}\left[ (X-\mathbb{E}\left[ X \right] )^2 | \mathcal{G} \right]  \right]  \\
+    =&\mathbb{E}\left[ \mathbb{E}\left[ (X-\mathbb{E}\left[ X|\mathcal{G} \right] + \mathbb{E}\left[ X|\mathcal{G} \right] -\mathbb{E}\left[ X \right]  )^2 | \mathcal{G} \right]  \right]\\
+    =&\mathbb{E}\left[ \mathbb{E}\left[ (X-\mathbb{E}\left[ X|\mathcal{G} \right] )^2   |\mathcal{G} \right]  \right]  + \mathbb{E}\left[ (\mathbb{E}\left[ X|\mathcal{G} \right] -\mathbb{E}\left[ X \right]  )^2 |\mathcal{G} \right]   \\
+    =& \mathbb{E}\left[ var(X|\mathcal{G}) \right] + var(\mathbb{E}\left[ X|\mathcal{G} \right] )
+\end{align*}
+
+
+\section{4.2.17}
+
+\subsection{}
+We have
+\begin{align*}
+    \mathbb{E}\left[ X \right] =& \mathbb{E}\left[ \mathbb{E}\left[ \sum_{i=1}^N \xi _i |N \right]  \right]\\
+    =& \sum_{j=1}^\infty \mathbb{P}\left( N=j \right) \sum_{i=1}^j \mathbb{E}\left[ X_i \right] \\
+    =& \sum_{i=1}^\infty\sum_{j=i}^\infty \mathbb{P}\left( N= j \right) \mathbb{E}\left[ \xi _i \right] \\
+    =& \sum_{i=1}^\infty \mathbb{E}\left[ \xi _i \right] \sum_{j=i}^\infty \mathbb{P}\left( N= j \right) <\infty
+\end{align*}
+
+\subsection{}
+We have
+\begin{align*}
+    \mathbb{E}\left[ X^2 \right] =& \mathbb{E}\left[ \mathbb{E}\left[ \left( \sum_{i=1}^N \xi _i \right)^2 |N \right]  \right]\\
+    =& \sum_{j=1}^\infty \mathbb{P}\left( N=j \right)  \big(j\cdot var(\xi _i) + 2j^2 \mathbb{E}\left[ \xi _i \right] ^2\big)\\
+    =& \sum_{i=1}^\infty\sum_{j=i}^\infty \mathbb{P}\left( N=j  \right) \big(var(\xi _i) + 2j\mathbb{E}\left[ \xi _i \right] ^2\big) \\
+    =& var(\xi _i)\mathbb{E}\left[ N \right] + \mathbb{E}\left[ \xi _i \right]^2 \mathbb{E}\left[ N^2 \right]  <\infty\\
+     \Rightarrow var(X)=& \mathbb{E}\left[ X^2 \right] - \mathbb{E}\left[ X \right] ^2\\
+     =& var(\xi _i)\mathbb{E}\left[ N \right] + \mathbb{E}\left[ \xi _i \right]^2 \mathbb{E}\left[ N^2 \right] - \mathbb{E}\left[ \xi _i \right]^2 \mathbb{E}\left[ N \right]^2\\
+     =&   var(\xi _i)\mathbb{E}\left[ N \right] + \mathbb{E}\left[ \xi _i \right]^2var(N)
+\end{align*}
+
+\section{4.2.22}
+
+\subsection{}
+We have for $ \mathcal{G}\subseteq\mathcal{F} $:
+\begin{align*}
+    \mathbb{E}\left[ \left\vert X \right\vert ^p | \mathcal{G} \right]  =& \int \left\vert x \right\vert ^p  \,\mathrm{d}\mathbb{P}\left( \left\vert X \right\vert |\mathcal{G} \right) \\
+    \mathop{ = }\limits^{\text{integration by parts}} & \int p\left\vert x \right\vert ^{p-1} \mathbb{P}\left( \left\vert X \right\vert >x|\mathcal{G} \right) \,\mathrm{d}x
+\end{align*}
+
+\subsection{}
+Further we have
+\begin{align*}
+    \mathbb{E}\left[ \left\vert X \right\vert ^p | \mathcal{G} \right]  =&\int p\left\vert x \right\vert ^{p-1} \mathbb{P}\left( \left\vert X \right\vert >x|\mathcal{G} \right) \,\mathrm{d}x\\
+    =& \int_0^a +\int_a^\infty p\left\vert x \right\vert ^{p-1} \mathbb{P}\left( \left\vert X \right\vert >x|\mathcal{G} \right) \,\mathrm{d}x\\
+    \geq & \int_0^a p\left\vert x \right\vert ^{p-1} \mathbb{P}\left( \left\vert X \right\vert >a|\mathcal{G} \right) \,\mathrm{d}x\\
+    =& \mathbb{P}\left( \left\vert X \right\vert >a|\mathcal{G} \right) a^{p}\\
+     \Rightarrow \mathbb{P}\left( \left\vert X \right\vert >a|\mathcal{G} \right) \leq& a^{-p}\mathbb{E}\left[ \left\vert X \right\vert ^p | \mathcal{G} \right]
+\end{align*}
+
+
+
+\section{4.2.23}
+
+Using similar argument as Proposition 1.3.17 in textbook, we have by Cauchy-Schwarz inequality:
+\begin{align*}
+     1=\dfrac{ 1 }{ p }+\dfrac{ 1 }{ q }=& \dfrac{ \left\Vert X \right\Vert _p ^p }{ p\left\Vert X \right\Vert _p ^p } + \dfrac{ \left\Vert Y \right\Vert _q ^q }{ q\left\Vert X \right\Vert _q ^q }\\
+     \geq & \dfrac{ \mathbb{E}\left[ \left\vert XY \right\vert  \right]  }{ \left\Vert X \right\Vert _p \left\Vert Y \right\Vert _q }\\
+      \Rightarrow \mathbb{E}\left[ \left\vert XY \right\vert  \right]  \leq& \left\Vert X \right\Vert _p \left\Vert Y \right\Vert _q   
+\end{align*}
+
+\section{4.3.13}
+
+\subsection{}
+As we stated previously in 4.2.16, for any given $ N $, 
+\begin{align*}
+    \mathbb{E}\left[ (\mathbb{E}\left[ X| \mathcal{G}_m \right] -\mathbb{E}\left[ X| \mathcal{G}_N \right] )^2 \right] ,\quad m\geq N
+\end{align*}
+is a increasing function in $ m $ (because $ \mathbb{E}\left[ (X-\mathbb{E}\left[ X| \mathcal{G}_m \right])^2 \right]  $ is decreasing). On the other hand since $ X\in L^2(\mathcal{F}) $, this quantity is bounded. The above means that $ \mathbb{E}\left[ (\mathbb{E}\left[ X| \mathcal{G}_m \right] -\mathbb{E}\left[ X| \mathcal{G}_N \right] )^2 \right] $ has some limit, i.e.
+\begin{align*}
+    \mathbb{E}\left[ (\mathbb{E}\left[ X| \mathcal{G}_m \right] -\mathbb{E}\left[ X| \mathcal{G}_n \right] )^2 \right] \to 0,\quad m,n\to \infty
+\end{align*}
+i.e. it's a cauchy sequence. 
+
+\subsection{}
+
+For Hilbert space $ L^2(\mathcal{G}) $, we see that $ \exists h $ s.t. the cauchy sequence $ \mathbb{E}\left[ X| \mathcal{G}_n \right]  $ converges to $ h $ in $ L^2(\mathcal{F}) $. And by the Orthogonal Projection Theorem, we have this $ h $ being the unique minimizer that reaches $ \min_{g\in \mathcal{G}}\mathbb{E}\left[ (X-g)^2|\mathcal{G} \right]  $. i.e. 
+\begin{align*}
+     \mathbb{E}\left[ X| \mathcal{G}_m \right] \to h = \mathbb{E}\left[ X| \mathcal{G} \right]
+\end{align*}
+
+
+\section{4.4.8}
+
+\subsection{}
+We have:
+\begin{align*}
+    \mathbb{E}\left[ \xi _1|S_n \right] = \ldots = \mathbb{E}\left[ \xi _n|S_n \right] 
+\end{align*}
+thus
+\begin{align*}
+    \mathbb{E}\left[ \xi _1|S_n \right] =& n^{-1}\mathbb{E}\left[ \sum_{i=1}^n \xi _i | S_n \right] = n^{-1}S_n 
+\end{align*}
+
+\subsection{}
+Consider transformation $ (\xi _1,\xi _2)\mapsto (\xi _1, u)=(\xi _1,\xi _1+\xi _2) $, which gives
+\begin{align*}
+    f_{\xi _1,u}(\xi _1,u)=& \lambda ^2e^{-\lambda u}\mathbb{1}_{ \xi _1>0,u>\xi _1 }\\
+    f_u(u)=&\lambda ^2 u e^{-\lambda u} \mathbb{1}_{ u>0 }\\ 
+\end{align*}
+And we have
+\begin{align*}
+    f(\xi _1|u)=&\dfrac{ 1 }{ u } \mathbf{1}_{ \xi _1>0,u>\xi _1 }\sim \mathrm{ Unif }(0,u)  
+\end{align*}
+i.e.
+\begin{align*}
+    \mathbb{P}\left( \xi _1\leq b|S_2 \right) =& \dfrac{ b }{ S_2 }\mathbb{1}_{ 0<b<S_2 } 
+\end{align*}
+
+\section{4.4.10}
+
+Note that we have
+\begin{align*}
+    cov(X-\dfrac{ \mathbb{E}\left[ XY \right]  }{ \mathbb{E}\left[ Y^2 \right]  }Y ,Y) =0 
+\end{align*}
+and both $ X-\dfrac{ \mathbb{E}\left[ XY \right]  }{ \mathbb{E}\left[ Y^2 \right]  }Y $ and $ Y $ are gaussian, thus are independent. Now we have
+\begin{align*}
+    \mathbb{E}\left[ X|Y \right] =&\mathbb{E}\left[ X-\dfrac{ \mathbb{E}\left[ XY \right]  }{ \mathbb{E}\left[ Y^2 \right]  }Y + \dfrac{ \mathbb{E}\left[ XY \right]  }{ \mathbb{E}\left[ Y^2 \right]  }Y |Y  \right]  \\
+    =& 0 + \dfrac{ \mathbb{E}\left[ XY \right]  }{ \mathbb{E}\left[ Y^2 \right]  }Y= \rho Y                                                 
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
