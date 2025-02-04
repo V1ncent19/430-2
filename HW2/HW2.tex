@@ -1,0 +1,482 @@
+\documentclass[11pt,a4paper]{ctexart}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+% newcommand
+\newcommand{\F}{\mathcal{F}}
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-2 2025 Winter}}
+
+{\Large\textbf{HW2}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+
+% 5.1.8 5.1.12 ++++++++++++++++++++++++5.1.15 5.1.24 5.1.26 5.1.35 5.2.8 5.2.11 5.2.12(a)(b) 5.2.15
+
+\section{5.1.8}
+
+\subsection{}
+We have
+\begin{align*}
+    \mathbb{E}\left[ D_n \right] =& \mathbb{E}\left[ \mathbb{E}\left[ X_n-X_{n-1} | \F_{n-1} \right]  \right]  \\
+    =& \mathbb{E}\left[ \mathbb{E}\left[ X_n|\F_{n-1} \right] - X_{n-1} \right] \\
+    =&0,\qquad n\geq 1
+\end{align*}
+thus $ D_n $ are mean-zero and we have (assume WLOG $ n>m $)
+\begin{align*}
+    cov(D_n,D_m) =& \mathbb{E}\left[ D_nD_m \right] \\
+    =&\mathbb{E}\left[ \mathbb{E}\left[ D_nD_m|\F_m \right]  \right] \\
+    =&\mathbb{E}\left[ D_m\mathbb{E}\left[ D_n|\F_m \right]  \right] \\
+    =&0
+\end{align*}
+thus $ D_n $ are uncorrelated.
+
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ X_lY_l|\F_n \right] - X_nY_n  =& \mathbb{E}\left[ X_lY_l | \F_n \right] - X_n\mathbb{E}\left[ Y_l|\F_n \right] - Y_n\mathbb{E}\left[ X_l|\F_n \right] + X_nY_n \\ 
+    =&  \mathbb{E}\left[ (X_l-X_n)(Y_l-Y_n)|\F_n \right] \\
+\end{align*}
+so we proved the first part. 
+
+Take $ l=n+1 $ we have for each $ n $:
+\begin{align*}
+    \mathbb{E}\left[ X_{n+1}Y_{n+1}|\F_n \right] - X_nY_n = \mathbb{E}\left[ (X_{n+1}-X_n)(Y_{n+1}-Y_n)|\F_n \right] 
+\end{align*}
+then repeat for $ n+1 $ to $ l $ we have
+\begin{align*}
+    \mathbb{E}\left[ X_lY_l|\F_n \right] - X_nY_n  =& \mathbb{E}\left[\ldots \mathbb{E}\left[ X_lY_l|\F_{l-1} \right] -X_{l-1}Y_{l-1} + \ldots X_{n+1}Y_{n+1}-X_{n}Y_{n} | \ldots | \F_n \right] \\
+    =& \sum_{k=n+1}^l \mathbb{E}\left[ (X_k-X_{k-1})(Y_{k}-Y_{k-1}) |\F_n \right] 
+\end{align*}
+
+
+\subsection{}
+
+By the above, in which we let $ Y_i=X_i $, we have
+\begin{align*}
+    C^2\geq \mathbb{E}\left[ X_l^2|\mathcal{F}_0 \right]  -X_0^2 = & \sum_{k=1}^l \mathbb{E}\left[ (X_k-X_{k-1})^2|\mathcal{F}_0 \right] \\
+    =& \sum_{k=1}^l \mathbb{E}\left[ D_k^2 \right] 
+\end{align*}
+
+then we have the following:
+\begin{align*}
+    \mathbb{E}\left[ (\sum_{k=1}^l D_k^2)^2 \right]  =& \mathbb{E}\left[ \sum_{k=1}^l D_k^4 \right] + 2\mathbb{E}\left[ \sum_{i=1}^l\sum_{j=1+1}^l D_i^2D_j^2 \right] \\
+    \leq & \mathbb{E}\left[ \sum_{k=1}^l (2C)^2 D_k^2 \right] + 2\mathbb{E}\left[ \sum_{i=1}^lD_i^2 \mathbb{E}\left[ \sum_{j=i+1}^l D_j^2 | \mathcal{F}_i \right]  \right] \\
+    \leq& 4C^2C^2 + 2C^4 = 6C^4
+\end{align*}
+
+
+
+
+
+\section{5.1.12}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item For $ \theta \wedge \tau $:
+    \begin{align*}
+        \{\omega : \theta \wedge \tau(\omega )\leq n\} =& \{\omega : \theta(\omega )\leq n \text{ or } \tau(\omega )\leq n\} \\
+        =& \{\omega : \theta(\omega )\leq n\} \cup \{\omega : \tau(\omega )\leq n\} \\
+        \in & \F_n  
+    \end{align*}
+    \item For $ \theta \vee \tau $:
+    \begin{align*}
+        \{\omega : \theta \vee \tau(\omega )\leq n\} =& \{\omega : \theta(\omega )\leq n \text{ and } \tau(\omega )\leq n\} \\
+        =& \{\omega : \theta(\omega )\leq n\} \cap \{\omega : \tau(\omega )\leq n\} \\
+        \in & \F_n 
+    \end{align*}
+    \item For $ \theta +\tau $:
+    \begin{align*}
+        \{\omega : \theta +\tau(\omega )\leq n\} =& \{\omega : \theta(\omega )+ \tau(\omega )\leq n\} \\
+        =& \bigcup_{k=0}^n \{\omega : \theta(\omega )=k \text{ and } \tau(\omega )=n-k\} \\
+        \in & \F_n
+    \end{align*}
+\end{itemize}
+
+\section{5.1.15}
+
+\subsection{}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item For $ k=1 $:
+    \begin{align*}
+        \mathbb{P}\left( \tau >r \right) =& \mathbb{P}\left( \tau >0+r|\F_0 \right) \leq 1-\varepsilon   
+    \end{align*}
+    \item If for $ k $ we have $ \mathbb{P}\left( \tau >kr \right) \leq (1-\varepsilon )^{k} $, then for $ k+1 $:
+    \begin{align*}
+        \mathbb{P}\left( \tau >(k+1)r \right) =& \mathbb{E}\left[ \mathbb{E}\left[ \mathbf{1}(\tau>kr+r) | \F_{kr} \right]  \right]\\
+        =& \mathbb{E}\left[ \mathbb{E}\left[ \mathbf{1}(\tau>kr+r)\big( \mathbf{1}(\tau>kr) + \mathbf{1}(\tau\leq kr) \big) | \F_{kr} \right]  \right] \\
+        =& \mathbb{E}\left[ \mathbf{1}(\tau>kr)\mathbb{E}\left[ \mathbf{1}(\tau>kr+r) | \F_{kr} \right]  \right] \\
+        \leq & (1-\varepsilon )^k(1-\varepsilon ) = (1-\varepsilon )^{k+1}
+    \end{align*}
+\end{itemize}
+Now we finish the proof by induction.
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ \tau \right] =& \sum_{t=0}^\infty \mathbb{P}\left( \tau \geq t \right)   
+    \leq \sum_{t=0}^\infty (1-\varepsilon )^{\lfloor t/r \rfloor} 
+    \leq \sum_{s=0}^\infty r(1-\varepsilon )^s <\infty 
+\end{align*}
+
+
+\section{5.1.24}
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ S_n^2 | \F_{n-1} \right] =& \mathbb{E}\left[ (\sum_{i=1}^n \xi _i)^2 | \F_{n-1} \right]  \\
+    =& (\sum_{i=1}^{n-1} \xi _i)^2 + 2\sum_{i=1}^{n-1} \xi _i \mathbb{E}\left[ \xi _n | \F_{n-1} \right] + \mathbb{E}\left[ \xi _n^2 | \F_{n-1} \right] \\
+    =& S_{n-1}^2 + \mathbb{E}\left[ \xi _n^2 | \F_{n-1} \right]\\
+    \geq & S_{n-1}^2
+\end{align*}
+thus $ S_n^2 $ is a submartingale.
+
+Then we have
+\begin{align*}
+    \mathbb{E}\left[ S_n^2-s_n^2 | \F_{n-1} \right] =&   S_{n-1}^2 + \mathbb{E}\left[ \xi _n^2 | \F_{n-1} \right] - s_{n-1}^2 - \mathbb{E}\left[ \xi _i^2 | \F_{n-1} \right] \\
+    =& S_{n-1}^2 - s_{n-1}^2 
+\end{align*}
+thus $ S_n^2-s_n^2 $ is a martingale.
+
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ e^{S_n}| \F_{n-1} \right] =& \mathbb{E}\left[ e^{S_{n-1}+\xi _n} | \F_{n-1} \right] \\
+    =& e^{S_{n-1}}\mathbb{E}\left[ e^{\xi _n} | \F_{n-1} \right] \\
+    \geq & e^{S_{n-1}} e^{\mathbb{E}\left[ \xi _n | \F_{n-1} \right]} \\
+    =& e^{S_{n-1}}
+\end{align*}
+thus $ e^{S_n} $ is a submartingale.
+
+Then we have 
+\begin{align*}
+    \mathbb{E}\left[ e^{S_n}/\prod_{i=1}^n\mathbb{E}\left[ e^{\xi _i} \right] | \F_{n-1} \right] =&   e^{S_{n-1}}\mathbb{E}\left[ e^{\xi _n} | \F_{n-1} \right] /\prod_{i=1}^n\mathbb{E}\left[ e^{\xi _n} \right]=e^{S_{n-1}}/\prod_{i=1}^{n-1}\mathbb{E}\left[ e^{\xi _n} \right]
+\end{align*}
+thus $ e^{S_n}/\prod_{i=1}^n\mathbb{E}\left[ e^{\xi _i} \right] := e^{S_n}/m_n $ is a martingale.
+
+\section{5.1.26}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ f(S_n)|F_{n-1} \right] =& \mathbb{E}\left[ f(S_{n-1}+\xi _n)|F_{n-1} \right] 
+    = \dfrac{ 1 }{ \left\vert B(0,1) \right\vert  } \int_{B(S_{n-1},1)} f(x)\,\mathrm{d}x 
+    \leq f(S_{n-1})
+\end{align*}
+thus $ f(S_n) $ is a supermartingale.
+
+
+\section{5.1.35}
+
+\subsection{}
+
+We verify the three conditions of $ \sigma  $-algebra:
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item $ \Omega \in \F $: we see that
+    \begin{align*}
+        \Omega \cap \{\omega : \tau(\omega )\leq n\} = \{\omega : \tau(\omega )\leq n\} \in \F_n
+    \end{align*}
+    \item Closure under complement: we see that if $ A \cap \{\omega : \tau(\omega )\leq n\} \in \F_n $, then
+    \begin{align*}
+        A^\complement \cap \{\omega : \tau(\omega )\leq n\} = \{\omega : \tau(\omega )\leq n\}\backslash A \cap \{\omega : \tau(\omega )\leq n\} \in \F_{n}
+    \end{align*}
+    \item Closure under countable union: we see that if $ A_i \cap \{\omega : \tau(\omega )\leq n\} \in \F_n $, then
+    \begin{align*}
+        \bigcup_{i=1}^\infty A_i \cap \{\omega : \tau(\omega )\leq n\} = \bigcup_{i=1}^\infty \big( A_i \cap \{\omega : \tau(\omega )\leq n\} \big) \in \F_n
+    \end{align*}
+\end{itemize}
+
+Thus $ \F_\tau $ is a $ \sigma  $-algebra.
+
+Then if $ \tau(\omega )\equiv n $ then:
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item If $ A\in \F_n$: we have
+    \begin{align*}
+        A\cap \{\omega : \tau(\omega )\leq n\} = A \in \F_\tau 
+    \end{align*}
+    \item If $ A\not\in \F_n$: we have
+    \begin{align*}
+        A\cap \{\omega : \tau(\omega )\leq n\} = \emptyset \in \F_\tau  
+    \end{align*}
+\end{itemize}
+which means that in this case $ \F_\tau =\F_n $.
+
+\subsection{}
+
+$ X_\tau \in m\F_\tau $ is trivial from the definition of $ \F_\tau $, and thus $ \sigma (\tau)\subseteq \F_\tau $. For any $ k $ we have for $ \{\omega : X_k\mathbf{1}_{\tau = k} \}$ that: 
+\begin{align*}
+     \{\omega : X_k\mathbf{1}_{\tau = k} <t \} \cap \{\omega : \tau(\omega )\leq n\} = \{\omega : X_k(\omega ) < t \} \cap \{\omega : \tau(\omega ) = k\} \cap \{\omega : \tau(\omega )\leq n\} 
+\end{align*}
+for which if $ n\geq k $, $ \in \F_n $, and if $ n<k $, the above is empty and thus $ \in \F_n $, thus $ X_k\mathbf{1}_{\tau = k} \in m\F_\tau $.
+
+
+\subsection{}
+
+We have
+\begin{align*}
+    \mathbb{E}\left[ Y_\tau \mathbf{1}_{\tau =k}|\F_\tau \right] = & \mathbf{1}_{\tau = k}\mathbb{E}\left[ Y_k | \F_\tau \right] = \mathbf{1}_{\tau = k}\mathbb{E}\left[ Y_k | \F_k \right]  
+\end{align*}
+because as we previously proved that when $ \tau = n $, $ \F_\tau = \F_n $.
+
+
+\subsection{}
+
+Since $ \theta \leq\tau $, we have
+\begin{align*}
+    \{\omega : \tau(\theta )\leq n\} \subseteq \{\omega : \theta (\omega )\leq n\} \in \F_n,
+\end{align*}
+then if some $ A $ satisfies $ A\cap \{\omega: \theta (\omega)\leq n \} \in \F_n $, then
+\begin{align*}
+    A\cap \{\omega: \tau (\omega)\leq n \} = A\cap \{\omega: \theta (\omega)\leq n \} \cap \{\omega: \tau (\omega)\leq n \} \in \F_n
+\end{align*}
+thus we have $ \F_\theta \subseteq \F_\tau $.
+
+
+\section{5.2.8}
+
+Define $ \tau_x=\inf_{n\geq 0}\{n:X_n\leq -x\} $, then we have
+Denote $ A_n $ as follows:
+\begin{align*}
+    A_n = \{\omega : \tau_x(\omega )\leq n\} = \{\omega : \mathop{ \max }\limits_{k=0}^n X_k(\omega )\leq -x\}
+\end{align*}
+then we have $ X_{\tau_x}\leq -x $.
+
+Since $ X_n $ is a sub-martingale, we have
+\begin{align*}
+    \mathbb{E}\left[ X_0 \right]  \leq &\mathbb{E}\left[ X_{n \wedge \tau} \right] \\
+    =& \mathbb{E}\left[ X_n\mathbf{1}_{n<\tau} \right] + \mathbb{E}\left[ X_\tau \mathbf{1}_{n\geq \tau} \right] \\
+    \leq& \mathbb{E}\left[ X_n\mathbf{1}_{A_n^\complement} \right] - x\mathbb{P}\left( A_n \right) 
+\end{align*}
+
+We thus have
+\begin{align*}
+    \mathbb{P}\left( \mathop{ \min }\limits_{k=0}^n X_k \leq -x \right) =& \mathbb{P}\left( A_n \right) \\
+    \leq& x^{-1}(\mathbb{E}\left[ X_n\mathbf{1}_{A_n^\complement} \right] -  \mathbb{E}\left[ X_0 \right] ) \\
+    \leq& x^{-1}(\mathbb{E}\left[ (X_n)_+ \right] -  \mathbb{E}\left[ X_0 \right] )
+\end{align*}
+
+
+\section{5.2.11}
+
+\subsection{}
+
+If $ Y_n $ is a submartingale, then we have $ Y_n^p $ is a submartingale for $ p>1 $, then we have
+\begin{align*}
+    \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n Y_k\geq y  \right)  =& \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n Y_k^p\geq y^p  \right) 
+    \leq y^{-p}\mathbb{E}\left[ (Y_n^p)_+ \right] 
+    = y^{-p}\mathbb{E}\left[ (Y_n)_+^p \right]
+\end{align*}
+
+\subsection{}
+
+If $ Y_n $ is a martinagle, then we have $ Y_n^p $ is a submartingale for $ p>1 $, then we have
+\begin{align*}
+    \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n Y_k\geq y  \right)  \leq&y^{-p}\mathbb{E}\left[ (Y_n)_+^p \right]
+    \leq y^{-p}\mathbb{E}\left[ \left\vert Y_n \right\vert ^p \right] 
+\end{align*}
+
+\subsection{}
+
+If $ Y_n $ is a supermartingale, then we have $ (Y_n+c)^2 $ is a submartingale for $ c>0 $, then if $ Y_0=0 $, we have
+\begin{align*}
+    \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n Y_k\geq y  \right)  =& \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n (Y_k+c)^2\geq (y+c)^2  \right) \\
+    \leq& (y+c)^{-2}\mathbb{E}\left[ ((Y_n+c)^2)_+ \right] \\
+    \leq &\dfrac{ \mathbb{E}\left[ Y_n^2 \right] + c^2  }{ (y+c)^2 }
+\end{align*}
+optimize over $ c $ and we have optimal value of $ c=\mathbb{E}\left[ Y_n^2 \right]/y $, then we have
+\begin{align*}
+    \mathbb{P}\left( \mathop{ \max }\limits_{k=0}^n Y_k\geq y  \right)  \leq & \dfrac{ \mathbb{E}\left[ Y_n^2 \right] }{ \mathbb{E}\left[ Y_n^2 \right] + y^2  }.
+\end{align*}
+
+\section{5.2.12}
+
+\subsection{}
+
+Since $ X_n $ is a supermartingale, we have
+\begin{align*}
+    \mathbb{E}\left[ X_0 \right] = \mathbb{E}\left[ X_{n\wedge 0} \right] \geq \mathbb{E}\left[ X_{n\wedge \tau} \right] = \mathbb{E}\left[ X_n \mathbf{1}_{n<\tau} \right]+ \mathbb{E}\left[ X_\tau\mathbf{1}_{\tau\leq n} \right] \geq    \mathbb{E}\left[ X_\tau\mathbf{1}_{\tau\leq n} \right]   
+\end{align*}
+
+\subsection{}
+
+If $ X_n $ is a supermartingale, we have
+\begin{align*}
+    \mathbb{E}\left[ X_0 \right] \geq& \mathbb{E}\left[ X_\tau \mathbf{1}_{\tau \leq n} \right] 
+    \geq  x\mathbb{P}\left( \mathop{ \sup }\limits_{k} X_k \geq x \right)\\
+     \Rightarrow \mathbb{P}\left( \mathop{ \sup }\limits_{k} X_k \geq x \right) & \leq  x^{-1}\mathbb{E}\left[ X_0 \right]
+\end{align*}
+
+\section{5.2.15}
+
+We have the following two lemma:
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item For any $ x,y>0 $:
+    \begin{align*}
+         x(\log y)_+\leq e^{-1}y+ x(\log x)_+
+    \end{align*}
+    \item If some $ X,Y $ satisfies $ \mathbb{P}\left( Y\geq y \right) \leq y^{-1}\mathbb{E}\left[ X\mathbf{1}_{Y\geq y} \right] $, then
+    \begin{align*}
+        \mathbb{E}\left[ Y \right] \leq & 1+ \mathbb{E}\left[ X(\log Y)_+ \right]  
+    \end{align*}
+\end{itemize}
+
+Substitute $ Y = \mathop{ \max }\limits_{k\leq n}X_k  $, $ X = X_n $ for which we notice that the concentration condition is satisfied, then we have
+\begin{align*}
+    \mathbb{E}\left[ \mathop{ \max }\limits_{k\leq n}X_k \right] \leq& 1+ \mathbb{E}\left[ X_n(\log \mathop{ \max }\limits_{k\leq n}X_k)_+ \right]\\
+    \leq& 1+ e^{-1}\mathbb{E}\left[ \mathop{ \max }\limits_{k\leq n}X_k \right] + \mathbb{E}\left[ X_n(\log X_n)_+ \right]\\
+     \Rightarrow \mathbb{E}\left[ \mathop{ \max }\limits_{k\leq n}X_k \right]\leq& (1-e^{-1})^{-1}\big[ 1+ \mathbb{E}\left[ X_n(\log X_n)_+ \right] \big]
+\end{align*}
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
