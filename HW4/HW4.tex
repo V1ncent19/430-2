@@ -1,0 +1,287 @@
+\documentclass[11pt,a4paper]{ctexart}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+% newcommand
+\newcommand{\F}{\mathcal{F}}
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+\begin{document}
+
+\begin{center}\thispagestyle{plain}
+
+{\LARGE\textbf{STAT 430-2 2025 Winter}}
+
+{\Large\textbf{HW4}}
+
+Tuorui Peng\footnote{TuoruiPeng2028@u.northwestern.edu}
+\end{center}
+
+\thispagestyle{myheadings}\markright{Compiled using \LaTeX}
+\pagestyle{myheadings}\markright{Tuorui Peng}
+
+
+
+% Exercise 6.1.14, 6.1.18, 6.1.19, 6.2.2, 6.2.5, 6.2.8, 6.2.11, 6.2.18, 6.2.22, 6.2.23
+
+
+\section{Exercise 6.1.14}
+
+\subsection{}
+We have
+\begin{align*}
+    \mathbb{P}_{  }\left( X_{n+1}=1|X_1^n \right) =& \mathbb{E}_{  }\left[ \mathbf{1}_{X_{n+1}=1} | X_1^n \right]  \\
+    =& \mathbb{E}_{ \theta  }\left[ \mathbb{E}_{  }\left[ \mathbf{1}_{X_{n+1}=1} | X_1^n, \theta  \right] \right]  \\
+    =& \mathbb{E}_{ \theta  }\left[ 1-\theta  \right] \\
+    =& 1/2
+\end{align*}
+
+\subsection{}
+
+We have 
+\begin{align*}
+    \mathbb{P}_{  }\left( S_{n+1}=s | S_1^n \right) =& \mathbb{P}_{  }\left( S_{n+1} = s | X_1^n \right)  \\
+    =& \mathbb{P}_{  }\left( X_{n+1} = s- \sum_{i=1}^n X_i | X_1^n \right)\\
+    =& \mathbb{P}_{  }\left( X_{n+1} = s- S_n | S_n \right)   
+\end{align*}
+from the previous part. Thus we have $ S_n $ being Markov.
+
+
+\section{Exercise 6.1.18}
+\subsection{}
+
+By property of sets we have $ \Gamma _n \to \Gamma  $ thus $ \mathbf{1}_{\Gamma _n} \xrightarrow[]{\mathrm{a.s.}}  \mathbf{1}_{\Gamma } $, then by L\'evy's upward theorem we have:
+\begin{align*}
+    \mathbb{P}_{  }\left( \Gamma _n  |X_n \right)  = & \mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma _n} | X_n \right]\\
+    =&  \mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma _n} | \F_n \right] \\
+    \xrightarrow[L_1]{\mathrm{a.s.}} & \mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma } | \F_\infty \right] \\
+    =& \mathbf{1}_{\Gamma }
+\end{align*}
+
+
+\subsection{}
+
+Denote $ K:= \{\omega : X_n(\omega ) \in A_n \, i.o. \} $. Then we have that $ \forall N >0 $, $ \exists n>N $ s.t. $ \mathbb{P}_{  }\left( \Gamma _n \cap K | X_n  \right) \geq \eta >0 $. On the other hand we have
+\begin{align*}
+    \eta < \mathbb{P}_{  }\left( \Gamma _n \cap K | X_n \right) \xrightarrow[]{\mathrm{a.s.}} \mathbb{P}_{  }\left( \Gamma \cap K | X_{\infty} \right) = \mathbf{1}_{\Gamma \cap K} = 1 = \mathbb{P}_{  }\left( \Gamma \cap K \right) 
+\end{align*}
+which gives $ \mathbb{P}_{  }\left( K \backslash \Gamma  \right) =0 $. In the above we applied L\'evy's upward theorem to $ \Gamma_n \cap K | X_n $.
+
+
+\subsection{}
+
+Use $ A_n \equiv A $ and $ B_n \equiv B $ and we have using the precedence:
+\begin{align*}
+    1 \leq & \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup (\{X_n \in A \,i.o. \}\backslash \Gamma ) \cup \Gamma   \right)\\
+    \leq& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + \mathbb{P}_{  }\left( \{X_n \in A \,i.o. \}\backslash \Gamma   \right)\\
+    =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + 0\\
+    =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \right) + \mathbb{P}_{  }\left( \Gamma   \right)
+\end{align*}
+where $ \Gamma =\{ X_n\in B \,i.o.\} $ so thus we have proved the claim.
+
+
+\section{Exercise 6.1.19}
+We prove the result for symmetric SRW directly. Denote $ \tau  = \inf\{ k: \omega _k \geq b\} $ and 
+\begin{align*}
+    h_k(\omega )=& \sum_{i=-\infty}^{+\infty} \mathbf{1}_{\omega _{n-k} = b+i} ,\quad k\in [n]
+\end{align*}
+and by Strong Markov Property (SMP) we have
+\begin{align*}
+     \mathbb{P}_{  }\left( \max _{k\leq n} \omega _k \geq b \right) =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n} \right]\\
+     =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n}\sum_{\imath = -\infty}^{+\infty}\mathbf{1}_{\omega _n = \imath} \right] \\
+     =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n} \mathbb{E}_{  }\left[ \sum_{i=-\infty}^{+\infty} \mathbf{1}_{\theta ^{n\wedge\tau} \omega _{n-n\wedge\tau} = b+i} | \F_{n\wedge\tau} \right]   \right]\\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n} \mathbb{E}_{  }\left[ h_{n\wedge\tau}(\theta ^{n\wedge\tau} \omega ) | \F_{n\wedge\tau} \right]   \right]\\
+    \mathop{ = }\limits^{\text{SMP}} & \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n} \mathbb{E}_{ X_{n\wedge\tau} }\left[ h_{n\wedge\tau}(\omega ) \right]   \right]\\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \tau \leq n} \mathbb{E}_{ X_{n\wedge\tau} }\left[ \mathbf{1}_{\omega _{n-n\wedge\tau} = 0}+ 2\sum_{i=1}^\infty\mathbf{1}_{\omega _{n-n\wedge \tau} = i} \right]   \right]\\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{ \omega _n = b } \right] + 2\mathbb{E}_{  }\left[  \sum_{i=1}^\infty\mathbf{1}_{\omega _n = b+i} \right]\\
+    =& \mathbb{P}_{  }\left(\omega _n = b \right) +  2\mathbb{P}_{  }\left( \omega _n > b \right) 
+\end{align*}
+
+
+
+\section{Exercise 6.2.2}
+
+\subsection{}
+
+We use $ h_r = \mathbf{1}_{\omega _{n-r} \in B} $ and apply for stopping time $ T_{y,r} $ the SMP to obtain that
+\begin{align*}
+    \mathbb{P}_{ x }\left( X_n\in B, T_{y,r} \leq n \right)  =& \mathbb{E}_{  }\left[ \mathbf{1}_{X_n\in B} \mathbf{1}_{T_{y,r}\leq n} \right] \\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{T_{y,r}\leq n} \mathbb{E}_{  }\left[ h_{T_{y,r}}(\theta ^{T_{y,r}}\omega ) | \F_{T_{y,r}} \right] \right] \\
+    \mathop{ = }\limits^{\text{SMP}} & \mathbb{E}_{  }\left[ \mathbf{1}_{T_{y,r}\leq n} \mathbb{E}_{ y }\left[ h_{T_{y,r}}(\omega ) \right] \right] \\
+    =& \sum_{k=0}^{n-r} \mathbb{P}_{ x }\left( T_{y,r} = n-k \right) \mathbb{P}_{ y }\left( X_{n-k} \in B \right) 
+\end{align*}
+
+\subsection{}
+
+Making relabeling $ k \mapsto n-k $ and $ B= \{y\} $ and we have
+\begin{align*}
+    \mathbb{P}_{ x }\left( X_n=y \right)  =& \sum_{k=r}^n \mathbb{P}_{ x }\left( T_{y,r} = k \right) \mathbb{P}_{ y }\left( X_{n-k} = y \right) 
+\end{align*}
+
+
+\subsection{}
+
+We have
+\begin{align*}
+     \mathrm{R.H.S.}=& \sum_{n=r}^{l+r}\mathbb{P}_{ y }\left( X_n = y \right) \\
+     =& \sum_{n=r}^{l+r}\sum_{k=r}^n \mathbb{P}_{ y }\left( T_{y,r} = k \right) \mathbb{P}_{ y }\left( X_{n-k} = y \right) \\
+     =&\sum_{k=r}^{l+r}\mathbb{P}_{ y }\left( T_{y,r}=k \right) \sum_{n=k}^{l+r} \mathbb{P}_{ y }\left( X_{n-k} = y \right) \\
+     \leq&\sum_{k=r}^{l+r}\mathbb{P}_{ y }\left( T_{y,r}=k \right) \sum_{n=k}^{l+k} \mathbb{P}_{ y }\left( X_{n-k} = y \right) \\
+     =&\sum_{k=r}^{l+r}\mathbb{P}_{ y }\left( T_{y,r}=k \right) \sum_{j=0}^l \mathbb{P}_{ y }\left( X_j = y \right) \\
+     \leq&  \sum_{j=0}^l \mathbb{P}_{ y }\left( X_j = y \right)
+\end{align*}
+
+
+\section{Exercise 6.2.5}
+
+
+\subsection{}
+
+Since $ \mathbb{P}_{ x\not\in C }\left( \tau_C <\infty \right) >0  $, we know that $ \exists N>0 $ and some $ \varepsilon  $ s.t. 
+\begin{align*}
+    \mathbb{P}_{ x\not\in C }\left( \tau_C <N \right) >\varepsilon 
+\end{align*}
+and thus we have
+\begin{align*}
+    \mathbb{P}_{ x\not\in C }\left( \tau_C \geq N \right) \leq 1-\varepsilon  
+\end{align*}
+
+
+Consider applying the SMP to $ h:= \mathbf{1}_{\tau >N} $ we have
+\begin{align*}
+    \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > (k+1)N} \right] =& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} \mathbb{E}_{  }\left[ h(\theta ^{kN}\omega ) | \F_{kN} \right] \right] \\  
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} \mathbb{E}_{ x\not\in C }\left[ h(\omega ) \right] \right] \\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} \mathbb{P}_{ x\not\in C }\left( \tau_C \geq N \right) \right] \\
+    \leq& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} (1-\varepsilon ) \right] \\
+    \ldots& \leq (1-\varepsilon )^k
+\end{align*}
+
+
+
+
+\subsection{}
+
+By Borel-Cantelli lemma we have $ \mathbb{P}_{  }\left( \tau_C<\infty \right) =1  $ since
+\begin{align*}
+    \sum_{k=1}^\infty \mathbb{P}_{ x\not\in C }\left( \tau_C \geq kN \right) <\infty 
+\end{align*}
+Then we have for any $ x=X_0\not\in C $ that:
+\begin{align*}
+    g(x)=& \mathbb{P}_{ X_0=x }\left( \tau_A<\tau_B \right)  \\
+    =& \mathbb{P}_{ X_0 }\left( X_{\tau_C} \in A \right)\\
+    =& \sum_{y\in \mathbb{S}} \mathbb{P}_{ X_0 }\left( X_1 = y \right) \mathbb{P}_{ X_1=y }\left( X_{\tau_C} \in A \right) \\
+    =& \sum_{y\in \mathbb{S}} p(x,y)g(y)
+\end{align*}
+thus $ g(\, \cdot \, ) $ is harmonic on $ \mathbb{S}\backslash C $.
+
+
+\subsection{}
+
+Note that we have $ X_{n\wedge \tau_C - 1}\not\in C$
+
+By the harmonic proporty we have that 
+\begin{align*}
+    
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
