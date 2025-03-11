@@ -233,7 +233,8 @@ Consider applying the SMP to $ h:= \mathbf{1}_{\tau >N} $ we have
     =& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} \mathbb{E}_{ x\not\in C }\left[ h(\omega ) \right] \right] \\
     =& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} \mathbb{P}_{ x\not\in C }\left( \tau_C \geq N \right) \right] \\
     \leq& \mathbb{E}_{  }\left[ \mathbf{1}_{\tau > kN} (1-\varepsilon ) \right] \\
-    \ldots& \leq (1-\varepsilon )^k
+    \ldots& \leq (1-\varepsilon )^k\mathbb{E}_{ y }\left[ \mathbf{1}_{\tau> N} \right]\\
+    \leq& (1-\varepsilon )^k
 \end{align*}
 
 
@@ -261,8 +262,221 @@ Note that we have $ X_{n\wedge \tau_C - 1}\not\in C$
 
 By the harmonic proporty we have that 
 \begin{align*}
-    
+    \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 })| \F_n \right] =& \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 }) ( \mathbf{1}_{ \tau_C \leq n  } + \mathbf{1}_{\tau _C > n})  | \F_n \right] \\
+    =& g(X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 }) \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+    =&g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{  }\left[ g(\theta ^1 X_{  n\wedge \tau_C  }) \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+    \mathop{ = }\limits^{\text{SMP}}& g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{ X_{n\wedge \tau_C} =x\not\in C }\left[ g( X_{  n\wedge \tau_C +1 })  \right]\mathbf{1}_{\tau_C > n} \\
+    =& g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C > n} \\
+    =& g( X_{n\wedge \tau_C})
 \end{align*}
+thus we have $ g(X_{n\wedge \tau_C}) $ is a M.G.
+
+\subsection{}
+
+We have for such M.G. $ g(X_{n\wedge \tau_C}) $ with $ X_0 = x $ that:
+\begin{align*}
+    g(x)=&\mathbb{E}_{  }\left[ g(X_{0\wedge \tau_C}) \right]\\
+    =& \mathbb{E}_{  }\left[ g(X_{n \wedge \tau_C}) \right]\\
+    =& \mathbb{E}_{  }\left[ g(X_{\tau_C}) \right] \\
+    =& \mathbb{E}_{  }\left[ \mathbf{1}_{X_{\tau_C} \in A} \right]\\
+    =& \mathbb{P}_{ x }\left( \tau_A < \tau_B \right) 
+\end{align*}
+combine with previous results that $ \mathbb{P}_{ x }\left( \tau_A<\tau_B \right)  $ satisfies the condition of bounded harmonic on $ x\not\in C $ we have that it's the only one that satisfies the condition.
+
+
+\subsection{}
+
+Similar to (c) we prove the following:
+\begin{align*}
+     \mathbb{E}_{  }\left[ M_{n+1} | \F_n \right] =& \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C \leq n} | \F_n \right] + \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+     =& M_n \mathbf{1}_{\tau_C \leq n} + \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C > n} | \F_n \right] \\ 
+     =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + \mathbb{E}_{  }\left[ f(X_{n + 1}) | \F_n \right])\mathbf{1}_{\tau_C > n}\\ 
+     =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + \mathbb{E}_{ X_n=x\not\in C }\left[ f(X_{n+1}) \right] )\mathbf{1}_{\tau_C > n}\\
+     =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + f(X_n)-1 )\mathbf{1}_{\tau_C > n}\\
+     =& M_n
+\end{align*}
+thus $ M_n $ is a M.G. On the other hand we notice that
+\begin{align*}
+    \mathbb{E}_{  }\left[ M_n \right] =& \mathbb{E}_{  }\left[ n\wedge \tau_C + f(X_{n\wedge \tau_C}) \right] \\
+    \leq& \mathbb{E}_{  }\left[ \tau_C \right] + \sum_{x\in \mathbb{S}}f(x) \mathbb{P}_{  }\left( X_{n\wedge \tau_C} = x \right) \\ 
+    \leq& \mathbb{E}_{  }\left[ \tau_C \right] + \sum_{x\in \mathbb{S}\backslash C}f(x) + \sum_{x\in C} 0 <\infty
+\end{align*}
+then by DCT we have that
+\begin{align*}
+    \mathbb{E}_{ x }\left[ \tau_C \right] =& \mathbb{E}_{  }\left[ \lim_{n\to\infty} n\wedge\tau_C + f(X_{n\wedge \tau_C}) \right] \\
+    =& \lim_{n\to\infty} \mathbb{E}_{  }\left[ n\wedge\tau_C + f(X_{n\wedge \tau_C}) \right] \\
+    =&   \mathbb{E}_{ x }\left[ 0 + f(X_{0\wedge \tau_C}) \right] \\
+    =& f(x)
+\end{align*}
+
+
+\section{Exercise 6.2.8}
+
+\subsection{}
+We have that
+\begin{align*}
+    \rho _{xz}=& \mathbb{E}_{ x }\left[ \mathbf{1}_{T_z<\infty} \right]\\
+    \geq& \mathbb{E}_{ x }\left[ \mathbf{1}_{T_z <\infty}\mathbf{1}_{T_y<T_z} \right]   \\
+    =& \mathbb{E}_{ x }\left[ \mathbf{1}_{T_y < T_z}\mathbb{E}_{  }\left[ \theta ^{T_y}\mathbf{1}_{T_z<\infty } | \F_{T_y} \right]  \right]   \\
+    \mathop{ = }\limits^{\text{SMP}}& \mathbb{E}_{ x }\left[ \mathbf{1}_{T_y < T_z}\mathbb{E}_{ y }\left[ \mathbf{1}_{T_z<\infty } \right]  \right]   \\ 
+    =&\rho _{xy}\rho _{yz} > 0
+\end{align*}
+
+\subsection{}
+
+We have
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item $ x\leftrightarrow x $ by convention;
+    \item $ x\leftrightarrow y $ implies $ y\leftrightarrow x $ by symmetry of the condition $ \rho _{xy}>0 $, $ \rho _{yx}>0 $;
+    \item $ x\leftrightarrow y $ and $ y\leftrightarrow z $ implies $ x\leftrightarrow z $ by the previous part.
+\end{itemize}
+
+\subsection{}
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item If $ C_1 $ leads to $ C_2 $ and $ C_2 $ leads to $ C_3 $, then there exists $ x,y\in C_2 $ s.t. $ x\leftrightarrow y $ and thus for any $ z\in C_1 $ and $ w\in C_3 $ we have $ z\to  x \to y \to w $, thus $ z\leftrightarrow w $, i.e. $ C_1 $ leads to $ C_3 $.
+    \item If $ C_1 $ leads to $ C_2 $ and $ C_2 $ leads to $ C_1 $, then for any $ x\in C_1 $ and $ y\in C_2 $ we have $ x\to y$ and $ y\to x $, which turns out to be $ x\leftrightarrow y $, which is a contradiction, so if $ C_1 $ leads to $ C_2 $, then $ C_2 $ cannot lead to $ C_1 $.
+\end{itemize}
+
+\section{Exercise 6.2.11}
+
+
+\subsection{}
+We have $ \forall k $ and any bounded function $ g $ that
+\begin{align*}
+    \mathbb{E}_{ y }\left[ g(r_k,X_{R_{k-1}},\ldots X_{R_{k}-1}) | \F_{R_{k-1}} \right]=& \mathbb{E}_{ y }\left[ \theta ^{R_{k-1}}g(\omega ) | \F_{R_{k-1}} \right] \\
+    \mathop{ = }\limits^{\text{SMP}} & \mathbb{E}_{ y }\left[ g(\omega ) \right] \\
+    =& \mathbb{E}_{ y }\left[ g(r_0,X_0,\ldots X_{R_{0}-1}) \right]
+\end{align*}
+and notice that $ \F_{k-1}\supseteqq \sigma (r_1^{k},X_1^{R_{k}-1}) $ we have that $ (r_k,X_{R_{k-1}},\ldots X_{R_{k}-1}) $ are independent and identically distributed as $ (r_0,X_0,\ldots X_{R_{0}-1}) $.
+
+\subsection{}
+
+Similarly we have
+\begin{align*}
+    \mathbb{E}_{ \nu  }\left[ g(r_k,X_{R_{k-1}},\ldots X_{R_{k}-1}) | \F_{R_{k-1}} \right]
+    =&\mathbb{E}_{ \nu  }\left[ \mathbb{E}_{  }\left[ \theta ^{R_{k-1}} g(\omega ) | \F_{R_{k-1}} \right] |F_{R_1} \right]\\
+    =&\mathbb{E}_{ \nu  }\left[ \mathbb{E}_{ y }\left[ \theta ^{R_1}g(\omega ) \right] |\F_{R_1} \right]  \\
+    =&\mathbb{E}_{ y }\left[ g(r_2,X_{R_{1}},\ldots X_{R_{2}-1}) \right]
+\end{align*}
+thus proved that $ (r_k,X_{R_{k-1}},\ldots X_{R_{k}-1}) $ are independent and identically distributed as $ (r_1,X_{R_{1}},\ldots X_{R_{2}-1}) $, $ \quad k\geq 2 $.
+
+\section{Exercise 6.2.18}
+
+Denote the initial distribution as $ X_0\sim \nu  $.
+
+\subsection{}
+Take $ \nu =\delta _0 $, then we have 
+\begin{align*}
+ 0 =& \mathbb{E}_{ \nu  }\left[ X_0 \right] =0\\
+ =& \mathbb{E}_{ \nu  }\left[ X_1 \right] \\
+ =& \sum_{i=0}^N \mathbb{P}_{  }\left( X_0=0 \right)p(0,i)\\
+  \Rightarrow & p(0,i) =0, \quad i\neq 0 
+\end{align*}
+the above argument is similar for $ \nu =\delta _N $. Together we have $ p(0,0)=p(N,N)=1 $.
+
+\subsection{}
+
+We have for any $ x\not\in \{0,N\} $:
+\begin{align*}
+    1-\rho _{xx}=& \mathbb{P}_{ x }\left( \tau_x=\infty \right)  \\
+    \geq& \mathbb{E}_{ x }\left[ \mathbf{1}_{\tau_x=\infty} \mathbf{1}_{T_{\{0,N\}}<\infty} \right]\\
+    =& \mathbb{E}_{ x }\left[ \mathbf{1}_{\tau_{\{0,N\}}<\infty} \mathbb{E}_{  }\left[ \theta ^{\tau_{\{0,N\}}}\mathbf{1}_{T_x=\infty} | \F_{\tau_{\{0,N\}}} \right]  \right]\\
+    \mathop{ = }\limits^{\text{SMP}}=& \mathbb{E}_{ x }\left[ \mathbf{1}_{\tau_{\{0,N\}}<\infty} \mathbb{E}_{ X_{\tau_{\{0,N\}}} }\left[ \mathbf{1}_{\tau_x=\infty}  \right]  \right]\\   
+    =&\mathbb{E}_{ x }\left[ \mathbf{1}_{\tau_{\{0,N\}}<\infty} \right] >0
+\end{align*}
+thus proved that any $  x\not\in \{0,N\} $ is trancient.
+
+Then consider for any $ x $ and choose $ \nu = \delta _x $. We have
+\begin{align*}
+    \mathbb{E}_{ x }\left[ X_{\tau_{\{0,N\}}} \right] =& \mathbb{E}_{ x }\left[ X_0 \right] = x 
+\end{align*}
+on the other hand we know that
+\begin{align*}
+     \mathbb{E}_{ x }\left[ X_{\tau_{\{0,N\}}} \right] =& \mathbb{P}_{ x }\left( \tau_0<\tau_N \right) \times 0 + \mathbb{P}_{ x }\left( \tau_0>\tau_N \right) \times N = N\mathbb{P}_{ x }\left( \tau_0>\tau_N \right) 
+\end{align*}
+together we have $ \mathbb{P}_{ x }\left( \tau_0>\tau_N \right) = x/N $.
+
+
+\subsection{}
+
+We have for $ S_n $ denoting the symmeric SRW that $ \{S_n^2-n\} $ is a M.G. by checking the following:
+\begin{align*}
+    \mathbb{E}_{  }\left[ S^2_{n+1} - (n+1)|\F_n \right] =& \mathbb{E}_{  }\left[ S_n^2 + \xi _{n+1}^2 + 2S_n\xi _{n+1} - (n+1) |S_n \right] = S_n^2 -n
+\end{align*}
+and thus we have
+\begin{align*}
+    \mathbb{E}_{ x }\left[ S^2_{ \tau_{\{0,N\}}} - \tau_{\{0,N\}}\right]  =& \mathbb{E}_{ x }\left[ S^2_{0\wedge \tau_{\{0,N\}}} - 0\wedge \tau_{\{0,N\}} \right] =x^2
+\end{align*}
+on the other hand we have
+\begin{align*}
+    \mathbb{E}_{ x }\left[ S^2_{ \tau_{\{0,N\}}} - \tau_{\{0,N\}}\right]  =& \dfrac{ x }{ N }(N^2 - \mathbb{E}_{ x }\left[  \tau_{\{0,N\}} \right]) + \dfrac{ N-x }{ N }(0 - \mathbb{E}_{ x }\left[  \tau_{\{0,N\}} \right]) 
+\end{align*}
+together we have $ \mathbb{E}_{ x }\left[  \tau_{\{0,N\}} \right] = x(N-x) $.
+
+
+
+\section{6.2.22}
+
+
+
+We construct $ h(x)=\mathbf{1}_{x\not\in [-r,r]} $ and we have that $ G_{1/2} = [-r,r]\cap \mathbb{Z} $. We verify the super-harmonic as follows: for any $ x\in \mathbb{Z}\backslash G_r $ we have
+\begin{align*}
+    1=& h(x)\\
+    \geq& \sum_{m=-r}^{r}\mathbb{P}_{  }\left( \xi _i = m \right) \\
+    =&\sum_{y=x-r}^{x+r}p(x,y)\\
+    \geq& \sum_{y=x-r}^{x+r}p(x,y)h(y)
+\end{align*}
+since we have bounded difference of the chain. Thus by prop 6.2.21 we know that $ S_n $ is a recurrent chain.
+
+
+
+\section{6.2.23}
+
+
+\begin{itemize}[topsep=2pt,itemsep=0pt]
+    \item If constant function, WLOG $ f(x)\equiv 1 $, is super-harmonic, then we use the previous argument that choose $ h(x)=\mathbf{1}_{x\in \mathbb{S}\backslash F} $ where $ F $ is some finite set in $ \mathbb{S} $, in this way we have $ h $ being super-harmonic on $ \mathbb{S}\backslash F $ and thus by prop 6.2.21 we have that $ S_n $ is recurrent.
+    \item If $ S_n $ is recurrent, we consider the stopping time $ \tau_u:= \inf_n\{S_n = u\} $ where $ u $ is some state in $ \mathbb{S} $ and by recurrence we have $ \mathbb{P}_{ x }\left( \tau_u <\infty \right) =1 $ for any $ x\in \mathbb{S} $, then we have that a super-harmonic function $ f $ should be s.t. $ f(S_n) $ is a super-martingale, using the condition we see that $ \forall x\in \mathbb{S} $:
+    \begin{align*}
+        f(x)=&\mathbb{E}_{ x }\left[ f(S_0) \right]\\
+        \geq& \mathbb{E}_{ u }\left[ f(S_{\tau_u}) \right]\\
+        =& f(u)
+    \end{align*}
+    which means that $ f $ can only be a constant function.
+\end{itemize}
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

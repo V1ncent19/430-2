@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.9.19)  11 MAR 2025 00:28
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.9.19)  11 MAR 2025 01:19
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**HW3
-(./HW3.tex
+**HW4
+(./HW4.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (g:/texlive/2023/texmf-dist/tex/latex/ctex/ctexart.cls (g:/texlive/2023/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
 File: ctexbackend.cfg 2022/07/14 v2.5.10 Backend configuration file (CTEX)
@@ -911,7 +911,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \@float@every@listing=\toks49
 \c@listing=\count413
 )
-runsystem(if not exist _minted-HW3 mkdir _minted-HW3)...executed.
+runsystem(if not exist _minted-HW4 mkdir _minted-HW4)...executed.
 
  (g:/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2021/07/05 v2.14 Sectioning titles
@@ -1037,12 +1037,12 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@dimlist=\toks54
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 89.
-runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > HW3.aex <nul: /p x=^%~$PATH:i>> HW3.aex)...executed.
+runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > HW4.aex <nul: /p x=^%~$PATH:i>> HW4.aex)...executed.
 
-runsystem(del HW3.aex)...executed.
+runsystem(del HW4.aex)...executed.
 
- (./HW3.aux)
-\openout1 = `HW3.aux'.
+ (./HW4.aux)
+\openout1 = `HW4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
 LaTeX Font Info:    ... okay on input line 89.
@@ -1125,9 +1125,9 @@ File: translations-basic-dictionary-english.trsl (english translation file `tran
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 89.
 Package hyperref Info: Link coloring ON on input line 89.
- (./HW3.out) (./HW3.out)
+ (./HW4.out) (./HW4.out)
 \@outlinefile=\write6
-\openout6 = `HW3.out'.
+\openout6 = `HW4.out'.
 
 \c@lstlisting=\count447
 \c@tabularnotesi=\count448
@@ -1182,17 +1182,17 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 97.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
 
-] [2] [3] [4] [5] [6] [7] [8] [9] (./HW3.aux)
-Package rerunfilecheck Info: File `HW3.out' has not changed.
-(rerunfilecheck)             Checksum: E4A0BC606A514DB886DD75FA81E3B3FC;1621.
+] [2] [3] [4] [5] [6] [7] [8] [9] (./HW4.aux)
+Package rerunfilecheck Info: File `HW4.out' has not changed.
+(rerunfilecheck)             Checksum: 089E73815ECED515520A8AB6C71DD052;2151.
  ) 
 Here is how much of TeX's memory you used:
- 39295 strings out of 476683
- 888523 string characters out of 5807575
- 1869012 words of memory out of 5000000
- 58890 multiletter control sequences out of 15000+600000
+ 39294 strings out of 476683
+ 888487 string characters out of 5807575
+ 1862012 words of memory out of 5000000
+ 58889 multiletter control sequences out of 15000+600000
  522264 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,18n,97p,514b,827s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,18n,97p,514b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on HW3.pdf (9 pages).
+Output written on HW4.pdf (9 pages).

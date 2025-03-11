@@ -266,7 +266,14 @@ and since $ \inf_n X_n <0 $ a.s., we have $ \tau <\infty $ a.s., for which $ Y_\
 \begin{align*}
     0>\mathbb{E}_{  }\left[ Y_\tau \right] \geq & \mathbb{E}_{  }\left[ Y_0 \right] \geq 0
 \end{align*}
-which is a contradiction. Thus we have that $ \mathbb{E}_{  }\left[ \sup \left\vert Y_n \right\vert  \right]  =\infty $.
+which is a contradiction. Thus we have that $ \mathbb{E}_{  }\left[ \sup \left\vert Y_n \right\vert  \right]  =\infty $. Now since $ \sup \left\vert Y_n \right\vert  = \max \{ \sup Y_+, \sup Y_- \} $ while $ \sup Y_- \leq 1 $, we have
+\begin{align*}
+     \infty = \mathbb{E}_{  }\left[ \sup\left\vert Y_n \right\vert  \right]  \leq & \mathbb{E}_{  }\left[ \max \{ \sup \max\{X_n,-1\}_+, 1 \}\right] \\
+     \leq& \mathbb{E}_{  }\left[ \max\{ 1, \sup_{X_n}\} \right] 
+\end{align*}
+for this to hold, we must have $ \mathbb{E}_{  }\left[ \sup X_n \right] =\infty $. Thus we have proved (5.4.6).
+
+.6).
 
 
 Now using the lemma, we solve (5.4.7).
