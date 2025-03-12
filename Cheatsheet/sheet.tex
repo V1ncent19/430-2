@@ -1,0 +1,508 @@
+\documentclass[11pt,a4paper]{article}
+%以下为所使用的宏包
+\usepackage{ulem}%下划线
+\usepackage{amsmath,amsfonts,amssymb,amsthm,amsbsy}%数学符号
+\usepackage{graphicx}%插入图片
+\usepackage{booktabs}%三线表
+%\usepackage{indentfirst}%首行缩进
+\usepackage{tikz}%作图
+\usepackage{appendix}%附录
+\usepackage{array}%多行公式/数组
+\usepackage{makecell}%表格缩并
+\usepackage{siunitx}%SI单位--\SI{number}{unit}
+\usepackage{mathrsfs}%数学字体
+\usepackage{enumitem}%列表间距
+\usepackage{multirow}%列表横向合并单元格
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}%超链接引用
+\usepackage{float}%图片、表格位置排版
+\usepackage{pict2e,keyval,fp,diagbox}%带有斜线的表格
+\usepackage{fancyvrb,listings}%设置代码插入环境
+\usepackage{minted}%代码环境设置
+\usepackage{fontspec}%字体设置
+\usepackage{color,xcolor}%颜色设置
+\usepackage{titlesec} %自定义标题格式
+\usepackage{tabularx}%列表扩展
+\usepackage{authblk}%titlepage作者信息
+\usepackage{nicematrix}%更好的矩阵标定
+\usepackage{fbox}%更多浮动体盒子
+
+
+
+%以下是页边距设置
+\usepackage[left=0.5in,right=0.5in,top=0.81in,bottom=0.8in]{geometry}
+
+%以下是段行设置
+\linespread{1.4}%行距
+\setlength{\parskip}{0.1\baselineskip}%段距
+\setlength{\parindent}{2em}%缩进
+
+
+%其他设置
+\numberwithin{equation}{section}%公式按照章节编号
+\newenvironment{point}{\raggedright$\blacktriangleright$}{}
+\newenvironment{algorithm}[1]{\vspace{12pt} \hrule\hrule \vspace{3pt} \noindent\textbf{\color[HTML]{E63F00}Algorithm } \,\textit{#1} \vspace{3pt} \hrule\vspace{6pt}}{\vspace{6pt}\hrule\hrule \vspace{12pt}} % 算法伪代码格式环境
+
+
+% new enviroment theorem, with one parameter to specify the theorem name
+\newtheorem{theorem}{Theorem}[]
+% definition environment
+\newtheorem{definition}{Definition}[]
+% exercise environment
+\newtheorem{exercise}{Exercise}[]
+\newcommand{\F}{\mathcal{F}}
+
+
+%代码环境\lst设置
+\definecolor{CodeBlue}{HTML}{268BD2}
+\definecolor{CodeBlue2}{HTML}{0000CD}
+\definecolor{CodeGreen}{HTML}{2AA1A2}
+\definecolor{CodeRed}{HTML}{CB4B16}
+\definecolor{CodeYellow}{HTML}{B58900}
+\definecolor{CodePurPle}{HTML}{D33682}
+\definecolor{CodeGreen2}{HTML}{859900}
+\lstset{
+    basicstyle=\tt,%字体设置
+    numbers=left, %设置行号位置
+    numberstyle=\tiny\color{black}, %设置行号大小
+    keywordstyle=\color{black}, %设置关键字颜色
+    stringstyle=\color{CodeRed}, %设置字符串颜色
+    commentstyle=\color{CodeGreen}, %设置注释颜色
+    frame=single, %设置边框格式
+    escapeinside=`, %逃逸字符(1左面的键)，用于显示中文
+    %breaklines, %自动折行
+    extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+    xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+    tabsize=4, %设置tab空格数
+    showspaces=false, %不显示空格
+    emph={TRUE,FALSE,NULL,NAN,NA,<-,},emphstyle=\color{CodeBlue2}, %其他高亮}
+}
+
+
+%节标题格式设置
+\titleformat{\section}[block]{\large\bfseries}{Exercise \arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{}{    \arabic{section}.(\alph{subsection})}{1em}{}[]
+% \titleformat{\subsubsection}[block]{\normalsize\bfseries}{    \arabic{subsection}-\alph{subsubsection}}{1em}{}[]
+% \titleformat{\paragraph}[block]{\small\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+
+% \titleformat{\sectioncommand}[shape]{format}{title-label}{sep}{before-title}[after-title]
+
+
+
+% 中文字号
+% 初号42pt, 小初36pt, 一号26pt, 小一24pt, 二号22pt, 小二18pt, 三号16pt, 小三15pt, 四号14pt, 小四12pt, 五号10.5pt, 小五9pt
+
+
+\begin{document}
+
+
+\begin{theorem}[Thm 5.1.32]
+    If $(X_n, \mathcal{F}_n)$ is a sub-MG (or a sup-MG or a MG) and $\theta \leq \tau$ are stopping times for $\{\mathcal{F}_n\}$, then $(X_{n \wedge \tau }- X_{n \wedge \theta}, \mathcal{F}_n)$ is also a sub-MG (or sup-MG or MG, respectively). In particular, taking $\theta = 0$ we have that $(X_{n \wedge \tau}, \mathcal{F}_n)$ is then a sub-MG (or sup-MG or MG, respectively).
+\end{theorem}
+
+\begin{theorem}[Coro 5.1.33]
+    If $(X_n, \mathcal{F}_n)$ is a sub-MG and $\tau \geq \theta$ are $\mathcal{F}_n$-stopping times, then $\mathbb{E}X_{n \wedge \tau} \geq \mathbb{E}X_{n \wedge \theta}$ for all $n$. The reverse inequality holds in case $(X_n, \mathcal{F}_n)$ is a sup-MG, with $\mathbb{E}X_{n \wedge \theta} = \mathbb{E}X_{n \wedge \tau}$ for all $n$ in case $(X_n, \mathcal{F}_n)$ is a MG.
+\end{theorem}
+
+\begin{theorem}[Thm 5.2.6 Doob's Inequality]
+    For any sub-martingale $\{X_n\}$ and $x > 0$, let $\tau_x = \inf\{k \geq 0 : X_k \geq x\}$. Then, for any finite $n \geq 0$,
+    \begin{align*}
+        \mathbb{P}_{  }\left( \max_{k=0}^m X_k \geq x \right) \leq x^{-1} \mathbb{E}[X_n \mathbb{I}_{\{\tau_x \leq n\}}] \leq x^{-1} \mathbb{E}[(X_n)^+].
+    \end{align*}
+    
+    
+\end{theorem}
+
+
+\begin{theorem}[Thm 5.2.18 Doob's up-crossing]
+    If $\{X_n\}$ is a sup-MG then
+    \begin{align*}
+        (b - a) \mathbb{E}[U_n[a, b]] \leq \mathbb{E}[(X_n - a)_-] - \mathbb{E}[(X_0 - a)_-] \quad \forall a < b. 
+    \end{align*}
+    where $ U_n[a,b](\omega ) $ is the of up-crossings of the interval $[a,b]$ by $\{X_k(\omega), k = 0, 1, \ldots, n\}$: the largest $l \in \mathbb{Z}^+$ such that $X_{s_i}(\omega) < a$ and $X_{t_i}(\omega) > b$ for $1 \leq i \leq l$ and some $0 \leq s_1 < t_1 < \ldots < s_l < t_l \leq n$.
+\end{theorem}
+
+\begin{theorem}[Thm 5.3.2 Doobs' convergence]
+    % to tex:Suppose sup-MG (Xn, Fn) is such that supn{E[(Xn)−]} < ∞. Then, Xn  a.→s. X∞ and E|X∞| ≤ lim inf n E|Xn| is finite.
+    Suppose sup-MG $(X_n, \mathcal{F}_n)$ is such that $\sup_n \mathbb{E}[(X_n)_-] < \infty$. Then, $X_n \xrightarrow{a.s.} X_{\infty}$ and $\mathbb{E}|X_{\infty}| \leq \liminf_n \mathbb{E}|X_n|$ is finite.
+
+    And we have the following equivalent conditions (Exercise 5.3.3)
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item $\lim_n \mathbb{E}|X_n|$ exists and is finite.
+        \item $\sup_n \mathbb{E}|X_n| < \infty$.
+        \item $\liminf_n \mathbb{E}|X_n| < \infty$.
+        \item $\lim_n \mathbb{E}(X_n)_+$ exists and is finite.
+        \item $\sup_n \mathbb{E}(X_n)_+ < \infty$.
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Prop 5.3.5]
+    % to tex: Suppose {Xn} is a martingale of uniformly bounded differences. That is, almost surely supn |Xn − Xn−1| ≤ c for some finite non-random constant c. Then, P(A ∪ B) = 1 for the events  A = {ω : nli→m∞ Xn(ω) exists and is finite},  B = {ω : lim sup  n→∞  Xn(ω) = ∞ and lim inf  n→∞ Xn(ω) = −∞}.
+    Suppose $\{X_n\}$ is a martingale of uniformly bounded differences. That is, almost surely $\sup_n |X_n - X_{n-1}| \leq c$ for some finite non-random constant $c$. Then, $\mathbb{P}(A \cup B) = 1$ for the events
+    \begin{align*}
+        A = \left\{ \omega : \lim_n X_n(\omega) \text{ exists and is finite} \right\}, \quad B = \left\{ \omega : \limsup_n X_n(\omega) = \infty \& \liminf_n X_n(\omega) = -\infty \right\}. 
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}[Prop 5.3.8]
+    Suppose $(X_n, \mathcal{F}_n)$ is a non-negative sup-MG and $\tau \geq \theta$ are stopping times for the filtration $\{\mathcal{F}_n\}$. Then, $\mathbb{E}X_{\theta} \geq \mathbb{E}X_{\tau}$ are finite valued.
+\end{theorem}
+
+
+\begin{definition}[Defi 1.3.47 U.I.]
+    % to tex: A possibly uncountable collection of R.V.-s {Xα, α ∈ I} is called uniformly integrable (U.I.) if  (1.3.11) lim  M→∞ sup  α  E[|Xα|I|Xα|>M ] = 0 .
+    A possibly uncountable collection of random variables $\{X_{\alpha}, \alpha \in I\}$ is called uniformly integrable (U.I.) if
+    \begin{align*}
+        \lim_{M \to \infty} \sup_{\alpha} \mathbb{E}[|X_{\alpha}| \mathbb{I}_{|X_{\alpha}| > M}] = 0.
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[Thm 5.3.12]
+    % to tex: If (Xn, Fn) is a sub-MG, then {Xn} is U.I. (c.f. Definition  1.3.47), if and only if Xn  L→1 X∞, in which case also Xn  a.→s. X∞ and Xn ≤ E[X∞|Fn] for all n.
+    If $(X_n, \mathcal{F}_n)$ is a sub-MG, then $\{X_n\}$ is U.I, if and only if $X_n \xrightarrow{L^1} X_{\infty}$, in which case also $X_n \xrightarrow{a.s.} X_{\infty}$ and $X_n \leq \mathbb{E}[X_{\infty} | \mathcal{F}_n]$ for all $n$.
+\end{theorem}
+
+\begin{definition}[Def 5.3.13 Doob's martingale]
+    % The sequence Xn = E[X|Fn] with X an integrable R.V. and {Fn} a filtration, is called Doob’s martingale of X with respect to {Fn}.
+    The sequence $X_n = \mathbb{E}[X | \mathcal{F}_n]$ with $X$ an integrable R.V. and $\{\mathcal{F}_n\}$ a filtration, is called Doob's martingale of $X$ with respect to $\{\mathcal{F}_n\}$.
+\end{definition}
+
+
+
+\begin{theorem}[Prop 5.3.14]
+    %  to tex: A martingale (Xn, Fn) is U.I. if and only if Xn = E[X∞|Fn]  is a Doob’s martingale with respect to {Fn}, or equivalently if and only if Xn  L→1 X∞.
+    A martingale $(X_n, \mathcal{F}_n)$ is U.I. if and only if $X_n = \mathbb{E}[X_{\infty} | \mathcal{F}_n]$ is a Doob's martingale with respect to $\{\mathcal{F}_n\}$, or equivalently if and only if $X_n \xrightarrow{L^1} X_{\infty}$.
+\end{theorem}
+
+\begin{theorem}[Thm 5.3.15 L\'evy's Upward Theorem]
+    % to tex: Suppose supm |Xm| is integrable, Xn  a.→s. X∞ and Fn ↑ F∞. Then E[Xn|Fn] → E[X∞|F∞] both a.s. and in L1.
+    Suppose $\sup_m |X_m|$ is integrable, $X_n \xrightarrow{a.s.} X_{\infty}$ and $\mathcal{F}_n \uparrow \mathcal{F}_{\infty}$. Then $\mathbb{E}[X_n | \mathcal{F}_n] \xrightarrow{a.s.} \mathbb{E}[X_{\infty} | \mathcal{F}_{\infty}]$ both a.s. and in $L^1$.
+    
+\end{theorem}
+
+\begin{theorem}[Coro 5.3.16 L\'evy's 0-1]
+    % If Fn ↑ F∞, A ∈ F∞, then E[IA|Fn] a.→s. IA.
+    If $\mathcal{F}_n \uparrow \mathcal{F}_{\infty}$, $A \in \mathcal{F}_{\infty}$, then $\mathbb{E}[\mathbb{I}_A | \mathcal{F}_n] \xrightarrow{a.s.} \mathbb{I}_A$.
+\end{theorem}
+
+\begin{theorem}[Prop 5.3.22 Doob's $ L_p $ M.G. convergence]
+    % If the MG {Xn}  is such that supn E|Xn|p < ∞ for some p > 1, then there exists a R.V. X∞ such  that Xn → X∞ almost surely and in Lp (so ‖Xn‖p → ‖X∞‖p).
+    If the MG $\{X_n\}$ is such that $\sup_n \mathbb{E}|X_n|^p < \infty$ for some $p > 1$, then there exists a R.V. $X_{\infty}$ such that $X_n\xrightarrow[L_p]{\mathrm{a.s.}}  X_{\infty}$ (so $\|X_n\|_p \to \|X_{\infty}\|_p$).
+\end{theorem}
+
+\begin{theorem}[Thm 5.4.1 Doob's Optional Stopping]
+    % Suppose θ ≤ τ are Fn-stopping times and Xn = Yn+Vn for sub-MGs (Vn, Fn), (Yn, Fn) such that Vn is non-positive and {Yn∧τ } is uniformly integrable. Then, the R.V. Xθ and Xτ are integrable and EXτ ≥ EXθ ≥ EX0 (where Xτ (ω) and Xθ(ω) are set as lim supn Xn(ω) in case the corresponding stopping time is infinite).
+    Suppose $\theta \leq \tau$ are $\mathcal{F}_n$-stopping times and $X_n = Y_n + V_n$ for sub-MGs $(V_n, \mathcal{F}_n)$, $(Y_n, \mathcal{F}_n)$ such that $V_n$ is non-positive and $\{Y_{n \wedge \tau}\}$ is uniformly integrable. 
+    
+    Then, the R.V. $X_{\theta}$ and $X_{\tau}$ are integrable and $\mathbb{E}X_{\tau} \geq \mathbb{E}X_{\theta} \geq \mathbb{E}X_0$ (where $X_{\tau}(\omega)$ and $X_{\theta}(\omega)$ are set as $\limsup_n X_n(\omega)$ in case the corresponding stopping time is infinite).
+
+    And we have the following equivalent conditions for $ \{Y_{n\wedge \tau}\} $ being U.I. (Prop 5.4.4)\
+    % (a) Eτ < ∞ and a.s. E[|Yn − Yn−1||Fn−1] ≤ c for some finite, non-random c.  (b) {YnIτ>n} is uniformly integrable and Yτ Iτ<∞ is integrable. (c) (Yn, Fn) is a uniformly integrable sub-MG (or sup-MG).
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item $\mathbb{E}\tau < \infty$ and a.s. $\mathbb{E}[|Y_n - Y_{n-1}| | \mathcal{F}_{n-1}] \leq c$ for some finite, non-random $c$.
+        \item $\{Y_n \mathbb{I}_{\tau > n}\}$ is uniformly integrable and $Y_{\tau} \mathbb{I}_{\tau < \infty}$ is integrable.
+        \item $(Y_n, \mathcal{F}_n)$ is a uniformly integrable sub-MG (or sup-MG).
+    \end{itemize}
+\end{theorem}
+
+\begin{exercise}[Exer 5.4.6-5.4.7]
+    %(5.4.6) Show that if {Xn} is a sub-martingale such that EX0 ≥ 0 and infn Xn < 0 a.s. then necessarily E[supn Xn] = ∞.
+    % (5.4.7) Fixing b > 0, let τb = inf{n ≥ 0 : Sn ≥ b} for the random walk {Sn} of Definition 5.1.6 and suppose ξn = Sn − Sn−1 are uniformly bounded, of zero mean and positive variance.  (a) Show that τb is almost surely finite. Hint: See Proposition 5.3.5.  (b) Show that E[min{Sn : n ≤ τb}] = −∞.
+
+    (5.4.6) Show that if $\{X_n\}$ is a sub-martingale such that $\mathbb{E}X_0 \geq 0$ and $\inf_n X_n < 0$ a.s. then necessarily $\mathbb{E}[\sup_n X_n] = \infty$.
+
+    (5.4.7) Fixing $b > 0$, let $\tau_b = \inf\{n \geq 0 : S_n \geq b\}$ for the random walk $\{S_n\}$ of Definition 5.1.6 and suppose $\xi_n = S_n - S_{n-1}$ are uniformly bounded, of zero mean and positive variance.
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item Show that $\tau_b$ is almost surely finite.
+        \item Show that $\mathbb{E}[\min\{S_n : n \leq \tau_b\}] = -\infty$.
+    \end{itemize}
+
+\end{exercise}
+\begin{proof}
+    We first prove (5.4.6): Since $ \max $ is a convex function, we have that $ Y_n:=\max\{X_n,-1\} $ is still a sub-M.G. Now assume that $ \mathbb{E}_{  }\left[ \sup \left\vert Y_n \right\vert  \right]  <\infty $ i.e. $ Y_n $ is integrable. We consider the stopping time $ \tau:= \inf\{n: Y_n<0\}  $. Since $ \inf_n X_n <0 $ a.s., we have $ \tau <\infty $ a.s., for which $ Y_\tau <0 $, and thus we further have by Doob's optional stopping theorem that
+    \begin{align*}
+        0>\mathbb{E}_{  }\left[ Y_\tau \right] \geq & \mathbb{E}_{  }\left[ Y_0 \right] \geq 0
+    \end{align*}
+    which is a contradiction. Thus we have that $ \mathbb{E}_{  }\left[ \sup \left\vert Y_n \right\vert  \right]  =\infty $. Now since $ \sup \left\vert Y_n \right\vert  = \max \{ \sup Y_+, \sup Y_- \} $ while $ \sup Y_- \leq 1 $, we have
+    \begin{align*}
+        \infty = \mathbb{E}_{  }\left[ \sup\left\vert Y_n \right\vert  \right]  \leq & \mathbb{E}_{  }\left[ \max \{ \sup \max\{X_n,-1\}_+, 1 \}\right] \\
+        \leq& \mathbb{E}_{  }\left[ \max\{ 1, \sup{X_n}\} \right] 
+    \end{align*}
+    for this to hold, we must have $ \mathbb{E}_{  }\left[ \sup X_n \right] =\infty $. Thus we have proved (5.4.6):
+
+    \begin{itemize}[topsep=2pt,itemsep=0pt]
+        \item For random walk, we know that we have $ S_n/\sqrt{n}\xrightarrow[]{\mathrm{d}} N(0,1) $ which is a non-degenerate distribution. Thus we have that $ \mathbb{P}_{  }\left( \lim_n S_n \text{ exists} \right)  = 0 $, because for the event $ \{\lim_n S_n \text{ exists}\} $, we must have that $ S_n(\omega )/\sqrt{n}\to 0 $. On the other hand, for such M.G. with bounded difference, by (prop 5.3.5) we have that 
+        \begin{align*}
+            \lim_n S_n \text{ exists }, or \liminf_n S_n = -\infty,\, \limsup_n S_n = \infty,\quad \text{a.s.}
+        \end{align*}
+        and from the above argument we have that the first case is w.p. 0, thus we have that $ \limsup_n S_n = \infty \& \liminf_n S_n = -\infty $ a.s., which means that $ \tau_b<\infty $ a.s.
+        \item Note that we have $ S_{\tau_b} \geq b >0 $, i.e. $ \sup S_{n\wedge \tau_b} >0 $. And since $ \tau_b $ is a stopping time, we also have that $ S_{n\wedge b} $ is a M.G. (with $ S_{0\wedge \tau_b}=0 $), thus by the lemma we have that $ \mathbb{E}_{  }\left[ \min\{S_n:n\leq \tau_b \}\right] =  \mathbb{E}_{  }\left[ \inf_n S_{n\wedge \tau_b} \right] = \infty  $.
+    \end{itemize}
+    
+        
+\end{proof}
+
+
+\begin{theorem}[Coro 5.4.8 Gambler's Ruin]
+    % Fixing positive integers a and b the probability that a SRW {Sn}, starting at S0 = 0, hits −a before first hitting +b is  r = (eλb − 1)/(eλb − e−λa) for λ = log[(1 − p)/p] 6= 0. For the symmetric SRW, i.e. when p = 1/2, this probability is r = b/(a + b).
+    Fixing positive integers $a$ and $b$ the probability that a SRW $\{S_n\}$, starting at $S_0 = 0$, hits $-a$ before first hitting $+b$ is $r = (e^{\lambda b} - 1)/(e^{\lambda b} - e^{-\lambda a})$ for $\lambda = \log[(1 - p)/p] \neq 0$. For the symmetric SRW, i.e. when $p = 1/2$, this probability is $r = b/(a + b)$.
+\end{theorem}
+
+
+\begin{definition}[Def 6.1.1 Markov Chain]
+    % Given a filtration {Fn}, an Fn-adapted stochastic process {Xn} taking values in a measurable space (S, S) is called an Fn-Markov chain with state space (S, S) if for any A ∈ S,  (6.1.1) P[Xn+1 ∈ A|Fn] = P[Xn+1 ∈ A|Xn] ∀n, a.s.
+    Given a filtration $\{\mathcal{F}_n\}$, an $\mathcal{F}_n$-adapted stochastic process $\{X_n\}$ taking values in a measurable space $(\mathbb{S}, \mathcal{S})$ is called an $\mathcal{F}_n$-Markov chain with state space $(\mathbb{S}, \mathcal{S})$ if for any $A \in \mathcal{S}$,
+    \begin{align*}
+        \mathbb{P}[X_{n+1} \in A | \mathcal{F}_n] = \mathbb{P}[X_{n+1} \in A | X_n] \quad \forall n, \quad a.s.
+    \end{align*}
+\end{definition}
+
+
+\begin{theorem}[Prop 6.1.16 Strong Markov Property]
+    % Fix a homogeneous FnMarkov chain {Xn} with transition probabilities p(·, ·). Identifying via Xn(ω) 7→ ωn the restriction of P to F X = σ(Xk, k ≥ 1) with the probability space (S∞, Sc, Pν ), set the shift operator θ : S∞ 7→ S∞ such that (θω)k = ωk+1 for all k ≥ 0 (with the  corresponding iterates (θnω)k = ωk+n for k, n ≥ 0). Then, for any {hn} ⊆ bF X with supn,ω |hn(ω)| finite, and any Fn-stopping time τ  (6.1.7) E[hτ (θτ ω) | Fτ ]I{τ <∞} = EXτ [hτ ] I{τ <∞} .
+    Fix a homogeneous $\mathcal{F}_n$-Markov chain $\{X_n\}$ with transition probabilities $p(\cdot, \cdot)$. Identifying via $X_n(\omega) \mapsto \omega_n$ the restriction of $\mathbb{P}$ to $\mathcal{F}_X = \sigma(X_k, k \geq 1)$ with the probability space $(S_{\infty}, \mathcal{S}_c, \mathbb{P}_{\nu})$, set the shift operator $\theta : S_{\infty} \to S_{\infty}$ such that $(\theta \omega)_k = \omega_{k+1}$ for all $k \geq 0$ (with the corresponding iterates $(\theta^n \omega)_k = \omega_{k+n}$ for $k, n \geq 0$). Then, for any $\{h_n\} \subseteq \mathcal{F}_X$ with $\sup_{n,\omega} |h_n(\omega)|$ finite, and any $\mathcal{F}_n$-stopping time $\tau$,
+    \begin{align*}
+        \mathbb{E}[h_{\tau}(\theta_{\tau} \omega) | \mathcal{F}_{\tau}] \mathbb{I}_{\{\tau < \infty\}} = \mathbb{E}[h_{\tau}] \mathbb{I}_{\{\tau < \infty\}}.
+    \end{align*}
+
+    And in the case of $ \tau = n $ and $ h_k=h $ we have Markov property
+    \begin{align*}
+        \mathbb{E}[h(\theta ^n\omega ) | \mathcal{F}_n] = \mathbb{E}_{X_n}[h]. 
+    \end{align*}
+\end{theorem}
+
+
+\begin{exercise}[Exer 6.1.18]
+    Consider a homogeneous Markov chain $\{X_n\}$ with $B$-isomorphic state space $(\mathbb{S}, \mathcal{S})$. Fixing $\{B_l\} \subseteq \mathcal{S}$, let $\Gamma_n = \bigcup_{l > n} \{X_l \in B_l\}$ and $\Gamma = \{X_l \in B_l \text{ i.o.}\}$.
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item Using the Markov property and L\'evy's upward theorem (Theorem 5.3.15), show that $\mathbb{P}(\Gamma_n | X_n) \xrightarrow{a.s.} \mathbb{I}_{\Gamma}$.
+        \item Show that $\mathbb{P}(\{X_n \in A_n \text{ i.o.}\} \cap \Gamma) = 0$ for any $\{A_n\} \subseteq \mathcal{S}$ such that for some $\eta > 0$ and all $n$, with probability one, $\mathbb{P}(\Gamma_n | X_n) \geq \eta \mathbb{I}_{\{X_n \in A_n\}}$.
+        \item Suppose $A, B \in \mathcal{S}$ are such that $\mathbb{P}_x(X_l \in B \text{ for some } l \geq 1) \geq \eta$ for some $\eta > 0$ and all $x \in A$. Deduce that 
+        \begin{align*}
+            \mathbb{P}(\{X_n \in A \text{ finitely often}\} \cup \{X_n \in B \text{ i.o.}\}) = 1. 
+        \end{align*}
+    \end{itemize}
+\end{exercise}
+
+\begin{proof}
+    \begin{itemize}[topsep=2pt,itemsep=0pt]
+        \item By property of sets we have $ \Gamma _n \to \Gamma  $ thus $ \mathbf{1}_{\Gamma _n} \xrightarrow[]{\mathrm{a.s.}}  \mathbf{1}_{\Gamma } $, then by L\'evy's upward theorem we have:
+        \begin{align*}
+            \mathbb{P}_{  }\left( \Gamma _n  |X_n \right)  = & \mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma _n} | X_n \right]=\mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma _n} | \F_n \right] 
+            \xrightarrow[L_1]{\mathrm{a.s.}}  \mathbb{E}_{  }\left[ \mathbf{1}_{\Gamma } | \F_\infty \right] 
+            = \mathbf{1}_{\Gamma }
+        \end{align*}
+        \item Denote $ K:= \{\omega : X_n(\omega ) \in A_n \, i.o. \} $. Then we have that $ \forall N >0 $, $ \exists n>N $ s.t. $ \mathbb{P}_{  }\left( \Gamma _n \cap K | X_n  \right) \geq \eta >0 $. On the other hand we have
+        \begin{align*}
+            \eta < \mathbb{P}_{  }\left( \Gamma _n \cap K | X_n \right) \xrightarrow[]{\mathrm{a.s.}} \mathbb{P}_{  }\left( \Gamma \cap K | X_{\infty} \right) = \mathbf{1}_{\Gamma \cap K} = 1 = \mathbb{P}_{  }\left( \Gamma \cap K \right) 
+        \end{align*}
+        which gives $ \mathbb{P}_{  }\left( K \backslash \Gamma  \right) =0 $. In the above we applied L\'evy's upward theorem to $ \Gamma_n \cap K | X_n $.
+        \item  Use $ A_n \equiv A $ and $ B_n \equiv B $ and we have using the precedence:
+        \begin{align*}
+            1 \leq & \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup (\{X_n \in A \,i.o. \}\backslash \Gamma ) \cup \Gamma   \right)\\
+            \leq& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + \mathbb{P}_{  }\left( \{X_n \in A \,i.o. \}\backslash \Gamma   \right)\\
+            =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + 0
+        \end{align*}
+        where $ \Gamma =\{ X_n\in B \,i.o.\} $ so thus we have proved the claim.
+        
+    \end{itemize}
+    
+        
+\end{proof}
+
+
+\begin{theorem}[Prop 6.2.1 Chapman-Kolmogorov]
+    For any $x, y \in \mathbb{S}$ and non-negative integers $k \leq n$,
+    \begin{align*}
+        \mathbb{P}_{ x }\left( X_n = y \right) = \sum_{z \in \mathbb{S}} \mathbb{P}_{ x }\left( X_k = z \right) \mathbb{P}_{ z }\left( X_{n-k} = y \right).
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    Using the canonical construction of the chain whereby $X_n(\omega) = \omega_n$, we combine the tower property with the Markov property for $h(\omega) = \mathbb{I}_{\{\omega_{n-k} = y\}}$ followed by a decomposition according to the value $z$ of $X_k$ to get that
+    \begin{align*}
+        \mathbb{P}_{ x }\left( X_n = y \right) = \mathbb{E}_{ x }\left[ h(\theta^k \omega) \right] = \mathbb{E}_{ x }\left[ \mathbb{E}_{x} \left[ h(\theta ^k\omega )|\mathbf{F}_{k} \right] \right] = \mathbb{E}_{ x }\left[ \mathbb{E}_{ X_k }\left[ h \right]  \right] = \sum_{z \in \mathbb{S}} \mathbb{P}_{ x }\left( X_k = z \right) \mathbb{P}_{ z }\left( X_{n-k} = y \right).
+    \end{align*}
+    This concludes the proof as $\mathbb{E}_{ z }\left( h \right) = \mathbb{P}_{ z }\left( X_{n-k} = y \right)$.
+    
+    
+\end{proof}
+
+\begin{definition}[Def 5.1.25 Harmonic]
+    % A lower semi-continuous function f : Rd 7→ R is superharmonic if for any x and r > 0,  f (x) ≥ 1  |B(0, r)|  ∫  B(x,r)  f (y)dy
+    A lower semi-continuous function $f : \mathbb{R}^d \to \mathbb{R}$ is superharmonic if for any $x$ and $r > 0$,
+    \begin{align*}
+        f(x) \geq \frac{1}{|B(0, r)|} \int_{B(x,r)} f(y)dy.
+    \end{align*}
+\end{definition}
+
+
+\begin{definition}[Def 6.2.4 Harmonic]
+    Extending Definition 5.1.25 we say that $f : \mathbb{S} \to \mathbb{R}$ which is either bounded below or bounded above is super-harmonic for the transition probability $p(x, y)$ at $x \in \mathbb{S}$ when $f(x) \geq \sum_{y \in \mathbb{S}} p(x, y)f(y)$. Likewise, $f(\cdot)$ is sub-harmonic at $x$ when this inequality is reversed and harmonic at $x$ in case an equality holds. Such a function is called super-harmonic (or sub-harmonic, harmonic, respectively) for $p(\cdot, \cdot)$ (or for the corresponding chain $\{X_n\}$), if it is super-harmonic (or, subharmonic, harmonic, respectively), at all $x \in \mathbb{S}$. Equivalently, $f(\cdot)$ which is either bounded below or bounded above is harmonic provided $\{f(X_n)\}$ is a martingale whenever the initial distribution of the chain is such that $f(X_0)$ is integrable. Similarly, $f(\cdot)$ bounded below is super-harmonic if $\{f(X_n)\}$ is a super-martingale whenever $f(X_0)$ is integrable.
+    
+\end{definition}
+
+\begin{exercise}[Exer 6.2.5]
+% Suppose S \ C is finite, infx∈/C Px(τC < ∞) > 0 and A ⊂ C, B = C \ A are both non-empty.  (a) Show that there exist N < ∞ and ǫ > 0 such that Py(τC > kN ) ≤ (1−ǫ)k for all k ≥ 1 and y ∈ S. (b) Show that g(x) = Px(τA < τB) is harmonic at every x ∈/ C. (c) Show that if a bounded function g(·) is harmonic at every x ∈/ C then g(Xn∧τC ) is a martingale. (d) Deduce that g(x) = Px(τA < τB) is the only bounded function harmonic at every x ∈/ C for which g(x) = 1 when x ∈ A and g(x) = 0 when x ∈ B.  (e) Show that if f : S 7→ R+ satisfies f (x) = 1 + ∑  y∈S p(x, y)f (y) at every x ∈/ C then Mn := n ∧ τC + f (Xn∧τC ) is a martingale, provided P(X0 ∈ C) = 0. Deduce that if in addition f (x) = 0 for x ∈ C then f (x) = ExτC for all x ∈ S.
+
+    Suppose $ \mathbb{S}\backslash C $ is finite, $ \inf_{x \not\in  C} \mathbb{P}_x(\tau_C < \infty) > 0 $ and $ A \subset C $, $ B = C \backslash A $ are both non-empty.
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item[(a)] Show that there exist $ N < \infty $ and $ \epsilon > 0 $ such that $ \mathbb{P}_y(\tau_C > kN) \leq (1-\epsilon)^k $ for all $ k \geq 1 $ and $ y \in \mathbb{S} $.
+        \item[(b)] Show that $ g(x) = \mathbb{P}_x(\tau_A < \tau_B) $ is harmonic at every $ x \not\in C $.
+        \item[(c)] Show that if a bounded function $ g(\cdot) $ is harmonic at every $ x \not\in C $ then $ g(X_{n \wedge \tau_C}) $ is a martingale.
+        \item[(d)] Deduce that $ g(x) = \mathbb{P}_x(\tau_A < \tau_B) $ is the only bounded function harmonic at every $ x \not\in C $ for which $ g(x) = 1 $ when $ x \in A $ and $ g(x) = 0 $ when $ x \in B $.
+        \item[(e)] Show that if $ f : \mathbb{S} \to \mathbb{R}^+ $ satisfies $ f(x) = 1 + \sum_{y \in \mathbb{S}} p(x, y)f(y) $ at every $ x \not\in C $ then $ M_n := n \wedge \tau_C + f(X_{n \wedge \tau_C}) $ is a martingale, provided $ \mathbb{P}(X_0 \in C) = 0 $. Deduce that if in addition $ f(x) = 0 $ for $ x \in C $ then $ f(x) = \mathbb{E}_x[\tau_C] $ for all $ x \in \mathbb{S} $.
+        
+    \end{itemize}
+    
+\end{exercise}
+
+
+\begin{proof}
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item[(c)] By the harmonic proporty we have that 
+        \begin{align*}
+            \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 })| \F_n \right] =& \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 }) ( \mathbf{1}_{ \tau_C \leq n  } + \mathbf{1}_{\tau _C > n})  | \F_n \right] \\
+            =& g(X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{  }\left[  g(X_{n\wedge \tau_C + 1 }) \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+            =&g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{  }\left[ g(\theta ^1 X_{  n\wedge \tau_C  }) \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+            \mathop{ = }\limits^{\text{SMP}}& g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + \mathbb{E}_{ X_{n\wedge \tau_C} =x\not\in C }\left[ g( X_{  n\wedge \tau_C +1 })  \right]\mathbf{1}_{\tau_C > n} \\
+            =& g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C\leq n} + g( X_{n\wedge \tau_C}) \mathbf{1}_{\tau_C > n} \\
+            =& g( X_{n\wedge \tau_C})
+        \end{align*}
+        thus we have $ g(X_{n\wedge \tau_C}) $ is a M.G.
+        \item[(e)] 
+        Similar to (c) we prove the following:
+        \begin{align*}
+             \mathbb{E}_{  }\left[ M_{n+1} | \F_n \right] =& \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C \leq n} | \F_n \right] + \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C > n} | \F_n \right] \\
+             =& M_n \mathbf{1}_{\tau_C \leq n} + \mathbb{E}_{  }\left[ M_{n+1} \mathbf{1}_{\tau_C > n} | \F_n \right] \\ 
+             =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + \mathbb{E}_{  }\left[ f(X_{n + 1}) | \F_n \right])\mathbf{1}_{\tau_C > n}\\ 
+             =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + \mathbb{E}_{ X_n=x\not\in C }\left[ f(X_{n+1}) \right] )\mathbf{1}_{\tau_C > n}\\
+             =& M_n \mathbf{1}_{\tau_C \leq n} + (n+1 + f(X_n)-1 )\mathbf{1}_{\tau_C > n}\\
+             =& M_n
+        \end{align*}
+        thus $ M_n $ is a M.G. On the other hand we notice that
+        \begin{align*}
+            \mathbb{E}_{  }\left[ M_n \right] =& \mathbb{E}_{  }\left[ n\wedge \tau_C + f(X_{n\wedge \tau_C}) \right] 
+            \leq \mathbb{E}_{  }\left[ \tau_C \right] + \sum_{x\in \mathbb{S}}f(x) \mathbb{P}_{  }\left( X_{n\wedge \tau_C} = x \right) \
+            \leq \mathbb{E}_{  }\left[ \tau_C \right] + \sum_{x\in \mathbb{S}\backslash C}f(x) + \sum_{x\in C} 0 <\infty
+        \end{align*}
+        then by DCT we have that
+        \begin{align*}
+            \mathbb{E}_{ x }\left[ \tau_C \right] = \mathbb{E}_{  }\left[ \lim_{n\to\infty} n\wedge\tau_C + f(X_{n\wedge \tau_C}) \right] 
+            = \lim_{n\to\infty} \mathbb{E}_{  }\left[ n\wedge\tau_C + f(X_{n\wedge \tau_C}) \right] 
+            =   \mathbb{E}_{ x }\left[ 0 + f(X_{0\wedge \tau_C}) \right] 
+            = f(x)
+        \end{align*}
+
+    \end{itemize}
+    
+        
+\end{proof}
+
+
+\begin{definition}[Def 6.2.7, 6.2.9]
+    $ \rho _{x,y} := \mathbb{P}_{ x }\left( T_y<\infty \right) $. Call A state $ y \in \mathbb{S} $ is called \textbf{recurrent} (or persistent) if $ \rho_{yy} = 1 $ and \textbf{transient} if $ \rho_{yy} < 1 $.
+
+    State $ y $ is said to be accessible from state $ x \neq y $ if $ \rho_{xy} > 0 $ (or alternatively, we then say that $ x $ leads to $ y $). Two states $ x \neq y $, each accessible to the other, are said to intercommunicate, denoted by $ x \leftrightarrow y $. A non-empty collection of states $ C \subseteq \mathbb{S} $ is called \textbf{irreducible} if each two states in $ C $ intercommunicate, and \textbf{closed} if there is no $ y \not\in C $ and $ x \in C $ such that $ y $ is accessible from $ x $.
+
+\end{definition}
+
+\begin{theorem}[Prop 6.2.10]
+
+    With $ T_y^0 = 0 $, let $ T_y^k = \inf\{n > T_y^{k-1} : X_n = y\} $ for $ k \geq 1 $ denote the time of the $ k $-th return to state $ y \in \mathbb{S} $ (so $ T_y^1 = T_y > 0 $ regardless of $ X_0 $). Then, for any $ x, y \in \mathbb{S} $ and $ k \geq 1 $,
+    \begin{align*}
+        \mathbb{P}_{ x }\left( T_y^k < \infty \right) = \rho_{xy} \rho_{y}^{k-1}. 
+    \end{align*}
+    Further, let $ N_{\infty}(y) $ denote the number of visits to state $ y $ by the Markov chain at positive times. Then, $ \mathbb{E}_x[N_{\infty}(y)] = \rho_{xy} /(1-\rho_{yy}) $ is positive if and only if $ \rho_{xy} > 0 $, in which case it is finite when $ y $ is transient and infinite when $ y $ is recurrent.
+
+\end{theorem}
+
+\begin{theorem}[Coro 6.2.12]
+    The following are equivalent for a state $ y $ being recurrent:
+    \begin{itemize}[topsep=0pt,itemsep=-8pt]
+        \item $ \rho_{yy} = 1 $.
+        \item $ \mathbb{P}_y(T_y^k < \infty) = 1 $ for all $ k $.
+        \item $ \mathbb{P}_y(X_n = y, i.o.) = 1 $.
+        \item $ \mathbb{P}_y(N_{\infty}(y) = \infty) = 1 $.
+        \item $ \mathbb{E}_y[N_{\infty}(y)] = \infty $.
+    \end{itemize}
+\end{theorem}
+
+
+\begin{theorem}[Prop 6.2.15]
+    If $ F $ is a finite set of transient states then for any initial distribution $ \mathbb{P}_{\nu}(X_n \in F \text{ i.o.}) = 0 $. Hence, any finite closed set $ C $ contains at least one recurrent state, and if $ C $ is also irreducible then $ C $ is recurrent.
+\end{theorem}
+
+
+\begin{theorem}[Prop 6.2.21]
+
+    Suppose $ \mathbb{S} $ is irreducible for a chain $ \{X_n\} $ and there exists $ h : \mathbb{S} \to [0, \infty) $ of finite level sets $ G_r = \{x : h(x) < r\} $ that is super-harmonic at $ \mathbb{S} \backslash G_r $ for this chain and some finite $ r $. Then, the chain $ \{X_n\} $ is recurrent.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+$f$-divergence quantifies the difference between a pair of distributions over a measurable space $(\mathcal{X},\mathcal{F})$. A formal definition is as follows:
+\begin{definition}[$ f $-divergence]
+    Let $ P $ and $ Q $ be two probability distributions on $ \mathcal{ X }  $. Then for any convex function $ f : (0, \infty) \to \mathbb{R} $ such that it is strictly convex at 1 and $ f(1) = 0 $, the $ f $-divergence of $ P $ from $ Q $ with $ Q \ll P $ is defined as 
+    \begin{align*}
+        D_f(Q \| P) = \mathbb{E}_P[f(\dfrac{\mathrm{d}^{} Q }{\mathrm{d} P^{} })],
+    \end{align*}
+    where $ \dfrac{\mathrm{d}^{} Q }{\mathrm{d} P^{} } $ is the Radon-Nikodym derivative of $ Q $ with respect to $ P $, whenever $Q\ll P$. And in the case that $ \mathcal{ X }  $ is discrete, we use the notation $ D_f(Q \| P) = \sum_{x \in \mathcal{ X }  } P(x) f(\dfrac{Q(x)}{P(x)}) $.
+    
+\end{definition}
+
+
+Some frequently used $f$ functions and the corresponding divergences are as follows:
+\begin{itemize}
+    \item \textbf{(KL-divergence)} $f(t) = t\log t$;
+    \begin{align*}
+        D(Q\Vert P) := \mathbb{E}_{ P }\left[ \dfrac{ Q }{ P } \log \dfrac{ Q }{ P } \right] = \mathbb{E}_{ Q }\left[ \log \dfrac{ P }{ Q } \right]. 
+    \end{align*}
+    \item \textbf{(Total variation)} $f(t) = \frac{1}{2}|t-1|$;
+    \begin{align*}
+        d_\mathrm{ TV }(P,Q):= \dfrac{1}{2}\mathbb{E}_{ P }\left[ \left\vert \dfrac{ Q }{ P } - 1  \right\vert  \right] = \dfrac{ 1 }{ 2 }\int \left\vert \,\mathrm{d}Q - \,\mathrm{d}P \right\vert  
+    \end{align*}
+    \item \textbf{($ \chi^2 $-divergence)} $ f(t)=(t-1)^2 $
+    \begin{align*}
+        \chi^2(Q\Vert P) := \mathbb{E}_{ P }\left[ (\dfrac{ Q }{ P }-1 )^2 \right] = \int \dfrac{ P^2 }{ Q }   - 1
+    \end{align*}
+\end{itemize}
+
+
+
+
+Distributional Robust Optimization (DRO) aims to optimize the risk with some relaxation on the distribution (thus is robust). In traditional scenario, the learning problem is formalized as
+\begin{align*}
+    \mathop{ \min }\limits_{\theta \in \Theta }R(\theta ):= \mathop{ \min }\limits_{\theta \in\Theta }\mathbb{E}_{ P }\left[ \ell(\theta ;Z) \right]    
+\end{align*}
+where $ \Theta \subseteq \mathbb{R}^d $ be the model class, $ \mathcal{Z} $ be the data domain and $ \ell:\Theta \times \mathcal{ Z }\to \mathbb{R}  $ is the loss function, and $ Z\sim P $ is the datat generating distribution supported on $ \mathcal{ Z } $. In DRO, we consider a set of distributions $ \mathcal{ Q } $ and solve the problem w.r.t. the 'worst case loss' over the distribution set:
+\begin{align*}
+    \mathop{ \min }\limits_{\theta \in\Theta }\mathop{ \sup }\limits_{Q\in \mathcal{ Q } }\mathbb{E}_{ Q }\left[ \ell(\theta ;Z) \right]    
+\end{align*}
+
+
+Now a natural question to ask is how to choose the set of distributions $ \mathcal{ Q } $. Here a intuitive way is to choose those that are `close' to the original distribution $ P $ in some sense, which can be characterized by the $ f $-divergence. Thus we have the following $ f $-divergence DRO problem (with radius $ \rho  $):
+\begin{align*}
+    \mathop{ \min }\limits_{\theta \in\Theta }\left\{ R_f(\theta ;P):= \mathop{ \sup }\limits_{Q\ll P} \mathbb{E}_{ Q }\left[ \ell(\theta ;Z) \right] \,:\quad D_f(Q\Vert P)\leq \rho   \right\}  
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

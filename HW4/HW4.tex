@@ -154,8 +154,7 @@ Use $ A_n \equiv A $ and $ B_n \equiv B $ and we have using the precedence:
 \begin{align*}
     1 \leq & \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup (\{X_n \in A \,i.o. \}\backslash \Gamma ) \cup \Gamma   \right)\\
     \leq& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + \mathbb{P}_{  }\left( \{X_n \in A \,i.o. \}\backslash \Gamma   \right)\\
-    =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + 0\\
-    =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \right) + \mathbb{P}_{  }\left( \Gamma   \right)
+    =& \mathbb{P}_{  }\left( \{X_n \in A \text{ finitely often} \} \cup \Gamma   \right) + 0
 \end{align*}
 where $ \Gamma =\{ X_n\in B \,i.o.\} $ so thus we have proved the claim.
 
@@ -436,13 +435,15 @@ since we have bounded difference of the chain. Thus by prop 6.2.21 we know that 
 
 \begin{itemize}[topsep=2pt,itemsep=0pt]
     \item If constant function, WLOG $ f(x)\equiv 1 $, is super-harmonic, then we use the previous argument that choose $ h(x)=\mathbf{1}_{x\in \mathbb{S}\backslash F} $ where $ F $ is some finite set in $ \mathbb{S} $, in this way we have $ h $ being super-harmonic on $ \mathbb{S}\backslash F $ and thus by prop 6.2.21 we have that $ S_n $ is recurrent.
-    \item If $ S_n $ is recurrent, we consider the stopping time $ \tau_u:= \inf_n\{S_n = u\} $ where $ u $ is some state in $ \mathbb{S} $ and by recurrence we have $ \mathbb{P}_{ x }\left( \tau_u <\infty \right) =1 $ for any $ x\in \mathbb{S} $, then we have that a super-harmonic function $ f $ should be s.t. $ f(S_n) $ is a super-martingale, using the condition we see that $ \forall x\in \mathbb{S} $:
+    \item A super-harmonic function $ f $ should be s.t. $ f(S_n) $ is a super-martingale, using the condition we see that $ \forall x\in \mathbb{S} $:
     \begin{align*}
-        f(x)=&\mathbb{E}_{ x }\left[ f(S_0) \right]\\
-        \geq& \mathbb{E}_{ u }\left[ f(S_{\tau_u}) \right]\\
-        =& f(u)
+        f(S_n)\xrightarrow[]{\mathrm{a.s.}} Y 
     \end{align*}
-    which means that $ f $ can only be a constant function.
+    and in $ f(S_n)$ we have that for any $ x\in \mathbb{S} $ that
+    \begin{align*}
+        \mathbb{P}_{ x }\left( T_x<\infty \right) = 1 
+    \end{align*}
+    then $ \mathbb{P}_{  }\left( S_n(\omega ) = x \,i.o. \right) = 1  $, thus all $ f(x) $ should be equal to each other, which gives that $ f $ is a constant function.
 \end{itemize}
 
     

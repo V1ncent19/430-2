@@ -200,15 +200,22 @@ Now follow similar idea as Theorem 5.3.15, we would obtain that $ Y_\infty \in m
 
 Then we have:
 \begin{align*}
-    \mathbb{E}_{  }\left[ Y_\infty | \F^B\infty \right] =& \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ X|\F^A_\infty \right] |\F^B\infty  \right] \\
-    =& \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ X|\F^B_\infty \right] |\F^A\infty  \right]\\
-    =& \mathbb{E}_{  }\left[ Z_\infty | \F^A\infty \right] = Z_\infty
+    Y_\infty = &\mathbb{E}_{  }\left[ Y_\infty | \F_{\infty}^B \right]\\
+    =& \mathbb{E}_{  }\left[ Y_\infty | \F_{\infty}^A\right] = \mathbb{E}_{  }\left[ X|\F_\infty^A \right] 
 \end{align*}
-and vice versa $ \mathbb{E}_{  }\left[ Z_\infty | \F^A\infty \right] = Y_\infty $. Together we have
+where the first line since $ Y_k\xrightarrow[]{\mathrm{a.s.}} Y_\infty $ and the second line since $ Y_\infty \in \F^A_\infty $. Together we have
 \begin{align*}
-    Y_\infty = \mathbb{E}_{  }\left[ Z_\infty | \F^A\infty \right]=\mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ Y_\infty | \F^B\infty \right] | \F^A\infty \right]
+     Y_\infty = \mathbb{E}_{  }\left[ Y_\infty | \F_{\infty}^B \right] = \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ Y_\infty | \F_\infty ^A \right] |\F_\infty ^B \right] = \mathbb{E}_{  }\left[ X| \sigma (\F_\infty^A,\F_\infty^B) \right] = Z_\infty
 \end{align*}
 thus we must have $ Y_\infty = Z_\infty $ a.s., then apply the U.I. property again we have $ Y_n-Z_n \xrightarrow[L_1]{\mathrm{a.s.}} 0 $.
+
+
+
+% and vice versa $ \mathbb{E}_{  }\left[ Z_\infty | \F^A_\infty \right] = Y_\infty $. Together we have
+% \begin{align*}
+%     Y_\infty = \mathbb{E}_{  }\left[ Z_\infty | \F^A_\infty \right]=\mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ Y_\infty | \F^B_\infty \right] | \F^A_\infty \right]
+% \end{align*}
+% 
 
 
 \section{5.3.24}
@@ -216,33 +223,49 @@ thus we must have $ Y_\infty = Z_\infty $ a.s., then apply the U.I. property aga
 
 \subsection{}
 
-For any fixed $ W $, there  exists some $ n_W $ such that $ W\in L^2\F_{n_W} $, then we have for $ n> n_W $ that 
+We first prove for $ W\in L^2\F_{n_W} $ fixed then we have for $ n> n_W $ that 
 \begin{align*}
     \mathbb{E}_{  }\left[ WZ_n \right] =& \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ WZ_n|\F_{n_W} \right]  \right]\\
     =& \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ \dfrac{ W }{ \sqrt{n} }\sum_{k=1}^{n_W}\xi _k |\F_{n_W} \right]  + \dfrac{ \mathbb{E}_{  }\left[ W|\F_{n_W} \right]  }{ \sqrt{n} }\sum_{k={n_W+1}}^\infty \xi _k   \right] \to 0
 \end{align*}
-since the first term decay to $ 0 $ as $ n\to\infty $, the second term simply has mean 0.
+since the first term decay to $ 0 $ as $ n\to\infty $, and the second term simply has mean 0.
 
-\subsection{}
-
-Define $ W_n:= \mathbb{E}_{  }\left[ W| \F_{n} \right] $, in this way we can write that $ WZ_n = W_mZ_n + (W-W_m)Z_n $. Then we consider the two parts:
+Then we upgrade to $ W\in L^2\F_\infty $. Define $ W_n:= \mathbb{E}_{  }\left[ W| \F_{n} \right] $, in this way we can write that $ WZ_n = W_mZ_n + (W-W_m)Z_n $. Then we consider the two parts:
 \begin{itemize}[topsep=2pt,itemsep=0pt]
-    \item[Part 1:] For any fixed $ m $ we have by (a) that
+    \item[Part 1:] For any fixed $ m $ we have by preceding that
     \begin{align*}
         \mathbb{E}_{  }\left[ W_mZ_n \right] \to 0,\quad (n\to\infty) 
     \end{align*}
     \item[Part 2:] We have
     \begin{align*}
-        \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert (W-W_m)Z-n \right\vert  \right]  \leq & (\lim_{n\to\infty}\mathbb{E}_{  }\left[ \left\vert Z_n \right\vert  \right] )\cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert  \right] \\
-        =& \mathrm{const}\cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert  \right] 
+        \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert (W-W_m)Z_n \right\vert  \right]  \leq & (\lim_{n\to\infty}\sqrt{\mathbb{E}_{  }\left[ \left\vert Z_n \right\vert^2  \right] \cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert^2  \right] }) \\
+        =& \mathrm{const}\cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert ^2 \right] 
     \end{align*}
     since by CLT, we would have $ Z_n\xrightarrow[]{\mathrm{d}} N(0,1) $.
 \end{itemize}
 Together we have for any $ m\in \mathbb{N}^+ $, 
 \begin{align*}
-    \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert WZ_n \right\vert  \right] \leq \mathrm{const}\cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert  \right]
+    \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert WZ_n \right\vert  \right] \leq \mathrm{const}\cdot \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert ^2 \right]
 \end{align*}
-further we notice that by the definition of $ W_m $ we have $ W_m\xrightarrow[L_1]{\mathrm{a.s.}} W $ thus $ \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert  \right] \to 0 $, thus we have $ \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert WZ_n \right\vert  \right] =0 $.
+further we notice that by the definition of $ W_m $ and using Doob's $ L_2 $ convergence we have $ W_m\xrightarrow[]{L_2} W $ thus $ \mathbb{E}_{  }\left[ \left\vert W-W_m \right\vert ^2  \right] \to 0 $, thus we have $ \limsup_{n\to\infty} \mathbb{E}_{  }\left[ \left\vert WZ_n \right\vert  \right] =0 $.
+
+
+
+
+
+
+\subsection{}
+
+
+Now for $ Z\in \F $, we know that the above convergence works for $ \mathbb{E}_{  }\left[ Z|\F_\infty \right]\in \F_{\infty}  $. Then we have
+\begin{align*}
+    \mathbb{E}_{  }\left[ WZ_n \right] = & \mathbb{E}_{  }\left[ \mathbb{E}_{  }\left[ WZ_n|\F_\infty \right]  \right] = \mathbb{E}_{  }\left[ Z_n \mathbb{E}_{  }\left[ W|\F_\infty \right]  \right]   \to 0
+\end{align*}
+
+
+
+
+
 
 Now if there exists some $ \tilde{Z} \in \F  $ s.t. $ Z\xrightarrow[]{L_2} \tilde{Z} $, which means that
 \begin{align*}
@@ -269,11 +292,9 @@ and since $ \inf_n X_n <0 $ a.s., we have $ \tau <\infty $ a.s., for which $ Y_\
 which is a contradiction. Thus we have that $ \mathbb{E}_{  }\left[ \sup \left\vert Y_n \right\vert  \right]  =\infty $. Now since $ \sup \left\vert Y_n \right\vert  = \max \{ \sup Y_+, \sup Y_- \} $ while $ \sup Y_- \leq 1 $, we have
 \begin{align*}
      \infty = \mathbb{E}_{  }\left[ \sup\left\vert Y_n \right\vert  \right]  \leq & \mathbb{E}_{  }\left[ \max \{ \sup \max\{X_n,-1\}_+, 1 \}\right] \\
-     \leq& \mathbb{E}_{  }\left[ \max\{ 1, \sup_{X_n}\} \right] 
+     \leq& \mathbb{E}_{  }\left[ \max\{ 1, \sup{X_n}\} \right] 
 \end{align*}
 for this to hold, we must have $ \mathbb{E}_{  }\left[ \sup X_n \right] =\infty $. Thus we have proved (5.4.6).
-
-.6).
 
 
 Now using the lemma, we solve (5.4.7).
